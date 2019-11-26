@@ -6,11 +6,15 @@ import VueRouter from "vue-router";
 
 import App from './components/App.vue'
 import Main from './components/Main.vue'
+import Login from './components/Login.vue'
+import Profile from './components/Profile.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-    { path : '/', component : Main}
+    { path : '/', component : Main},
+    { path : '/login', component : Login},
+    { path : '/profile/:id', component : Profile}
 ]
 
 const router = new VueRouter({

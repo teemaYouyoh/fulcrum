@@ -1,118 +1,77 @@
 <template>
     <div>
-        <!--Preloader-->
+       <div class="header">
+   <div class="container">
+    <h2 class="logo">FULCRUM</h2>
+    <input type="checkbox" id="chk">
+    <label for="chk" class="show-menu-btn">
+      <i class="fas fa-align-justify"></i>
+    </label>
 
-        <div class="preloader" id="preloader">
-            <div class="item">
-            <div class="spinner">
-            </div>
-            </div>
-        </div>
+    <ul class="menu">
+      <div class="linksHeader">
+          <a href="#"><i class="fas fa-search"></i></a>
+          <router-link :to="'/login'"><i class="fas fa-user"></i></router-link> 
+          <a href="#"><i class="fas fa-plus"></i></a>
+          <a href="#"><i class="fas fa-home"></i></a>
+      </div>
 
-        <div class="opacity-nav">
+      <div class="socialHeader">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
 
-                <div class="menu-index" id="buttons" style="z-index:999999">
-                <i class="fa  fa-close"></i>
-                </div>
+      <!-- <a href="#"><i class="fab fa-telegram"></i></a> -->
 
-            <ul class="menu-fullscreen">
-            <li><a class="ajax-link" href="">Home</a></li>
-            <li><a class="ajax-link" href="">Search</a></li>
-            <li><a class="ajax-link" href="">Login</a></li>
-            <li><a class="ajax-link" href="">Sign up</a></li>
+      <label for="chk" class="hide-menu-btn">
+        <i class="fas fa-times"></i>
+      </label>
+    </ul>
+    </div>
+  </div>
+
+  <div class="subHeader">
+    <div class="container">
+      <div class="navSubHeader">
+        <div class="subHeaderCategory">Category</div>
+        <div class="subHeaderKind">Kind</div>
+        <div class="subHeaderAuthor">Author</div>
+        <div class="subHeaderSort">Sort</div>
+      </div>
+    </div>
+  </div>
+   
+   <div class="content">
+       <div class="container">
+           <p class="mainContentP">Наша мета - об’єднати креативних людей</p>
+           
+           <p class="infoProjContent">Цей проект призначений для вільного розповсюдження текстової інформації (книги, вірші, статті тощо).</p>
+           
+           
+            <ul class="portfolio-grid" id="works">
+
+                <li v-for="work in works" class="grid-item">
+                   <div class="items_wrap">
+                          <img :src="work.image">
+                              <div class="grid-hover">
+                                <h1><router-link :to="'/profile/'+work._id.$oid"> {{work.name}}</router-link> </h1>
+                                <p>{{work.author}}</p>
+                              </div>
+                            </a>  
+                   </div>
+                </li>
+
             </ul>
+       </div>
+   </div>
+   
+   <div class="footer">
+       <div class="container">
+           <div class="bookFooter"></div>
+           <p>fulcrum</p>
+       </div>
+   </div>
 
-        </div>
-
-        <!--Header-->
-        <header id="fullscreen">
-            
-            <div class="logo" id="full" style="display:none;"><a class="ajax-link" href="index.html">FULCRUM</a></div>
-        
-            <div class="menu-index" style="display:none;" id="button">
-                <i class="fa fa-bars"></i>
-            </div>
-
-        </header>
-        <!--Header-->
-        <header class="boxed" id="header-white">
-
-        <div class="header-margin">
-        
-            <div class="logo"><a href="index.html">FULCRUM</a></div>
-            <ul class="header-nav">
-            <li><a class="ajax-link" href="#">Search</a>
-                <ul>
-                <li><a class="ajax-link" href="#">Authors</a></li> 
-                <li><a class="ajax-link" href="#">Books</a></li> 
-                <li><a class="ajax-link" href="#">Poems</a></li> 
-                <li><a class="ajax-link" href="#">Articles</a></li>         
-                </ul>
-            </li>
-            
-            <li><a class="ajax-link" href="#">Home</a>
-            </li>
-            <li><a class="ajax-link" href="#" style="margin-left: 210px">Login</a></li>
-            <li><a class="ajax-link" href="#">Sign up</a></li>
-            </ul>
-            
-            <ul class="social-icon">
-            <div class="social-index">
-                <li><a href="https://www.instagram.com/fulcrumcom"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.twitter.com/fulcrumcom"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.telegram.org/fulcrumcom"><i class="fa fa-telegram"></i></a></li>
-            </div>
-            </ul>
-            
-        </div>
-
-        </header>
-
-        <div class="clear"></div>
-
-        <!--Content-->
-
-        <div class="content" id="ajax-content">
-
-            <div class="text-intro" id="site-type">
-
-                <h1>Our goal is to unite</h1>
-                <h1 class="typewrite"><span></span></h1>
-                <p>This project is intended for the free distribution of textual information (books, poems, articles and so on).</p>
-
-            </div>
-
-
-        <!--Portfolio grid-->
-
-        <ul class="portfolio-grid" id="works">
-
-            <li v-for="work in works" class="grid-item" data-jkit="[show:delay=3000;speed=500;animation=fade]">
-            <img :src="work.image">
-                <a href="work.html">  
-                <div class="grid-hover">
-                    <h1>{{work.name}}</h1>
-                    <p>{{work.author}}</p>
-                </div>
-                </a>  
-            </li>
-
-        </ul>
-
-        </div>
-
-        <!--Footer-->
-
-        <footer id="footer-box">
-
-        <div class="footer-margin">
-        
-        <div class="copyright" id="footer-left">© Copyright 2019 Fulcrum.com. All Rights Reserved.</div>
-        
-        </div>
-
-
-        </footer>
     </div>
 </template>
 
@@ -121,750 +80,42 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VueTypedJs from 'vue-typed-js';
+import Typed from 'typed.js';
+ 
+
 Vue.use(VueAxios, axios)
+
 export default {
+    components : {
+	},
     data(){
         return{
-            works : []
+            works1 : [],
+            works : [
+                {"_id":{"$oid":"5d9c2915670bf70e748cf9d1"},"name":"Страна Высоких","section":"Poem","genre":"Social verse","author":"Vitaliy Kotkin","text":"<p>Расскаты грома по небу ночному,</p>\n<p>Слышны были и немому и глухому,</p>\n<p>А слепой безногий дед,</p>\n<p>Бежал за ними в след,</p>\n<p>Но впереди лишь тени были,</p>\n<p>Что били хозяев своих,</p>\n<p>Там мышка кошку гнала в нору,</p>\n<p>А тип со странной формой,</p>\n<p>Стоял погруженный в кому,</p>\n<p>Без мыслей о высоком,</p>\n<p>Ему б платили, он стоял,</p>\n<p>Перестали, он б стрелял,</p>\n<p>Ещё дальше, где-то в переулке,</p>\n<p>Стояла пара человек, возле дурки,</p>\n<p>Их послали в след за теми,</p>\n<p>Кто назвал планету шаром,</p>\n<p>Кто сказал что бога нет,</p>\n<p>И тут же Божа Кара,</p>\n<p>Снезошла на них,</p>\n<p>Карма.. Может...</p>\n<p>Но скорее просто кожа,</p>\n<p>Черная была...</p>\n<p>Кто быстрее прыгнет,</p>\n<p>Того и тапки,</p>\n<p>Кто заплатит больше,</p>\n<p>Тот и раньше встанет,</p>\n<p>Часов в 3 утра,</p>\n<p>С другом водкой,</p>\n<p>Пошел управлять подводной лодкой,</p>\n<p>Он взорвал Америку, всю Гейропу,</p>\n<p>Стал героем...</p>\n<p>Получил два жетона на метро,</p>\n<p>Один домой, второй на свалку...</p>","publicdate":{"$date":{"$numberLong":"1554843600000"}},"preview":"","image":"./src/img/covers/poem2.jpg","__v":{"$numberInt":"0"}},
+                {"_id":{"$oid":"5d9c29df670bf70e748cf9d2"},"name":"Штиль","section":"Poem","genre":"Philosophical verse","author":"Vitaliy Kotkin","text":"<p>Мнимое спокойствие снаружи,</p>\n<p>А внутри залпы со всех орудий,</p>\n<p>Стены разукрашенные разрушали,</p>\n<p>Дробили в пыль фундамент,</p>\n<p>От мысли лишней волноваться начинали,</p>\n<p>То море, озеро и океан,</p>\n<p>В которых всех одна вода текла,</p>\n<p>В них было все для штиля,</p>\n<p>Безветренной погоды,</p>\n<p>Но штормы внутри не давали им покоя,</p>\n<p>Бушевали, воду всю перемешали,</p>\n<p>Все корабли отправили на свалку,</p>\n<p>Рыбу выбросили во льдах Антарктики,</p>\n<p>Длились штормы не переставая,</p>\n<p>Достали они даже до ада с раем,</p>\n<p>Перемешали демонов и ангелов,</p>\n<p>Рогатым и хвостатым нимбы по вручали,</p>\n<p>А тем что с крыльями,</p>\n<p>Тризубци наточили,</p>\n<p>А Бог небесный,</p>\n<p>С адским бесом,</p>\n<p>Обручились наконец-то...</p>","publicdate":{"$date":{"$numberLong":"1557435600000"}},"preview":"","image":"./src/img/covers/poem3.jpg","__v":{"$numberInt":"0"}},
+                {"_id":{"$oid":"5d9c2bb6670bf70e748cf9d3"},"name":"Эффект ограниченных возможностей","section":"Article","genre":"Social issues","author":"Veronika Omelchuk","text":"<p>Перед тобой весь мир, твое же мировоззрение ограничено рамками этого города. Ты наверняка сочтешь эти слова глупыми и до боли наивными, но в этом и ловушка твоего псевдокритического мышления. Ты можешь сделать всё, что только можешь вообразить. И как же легко тобой управлять, обрезав кругозор. Тебя ограничат средства или связи. Нет, тебя ограничишь лишь ты сам.</p>\n<p>К чему строить планы и прикладывать усилия для их достижения? А вдруг всё это время окажется попусту упущенным? Вдруг я не смогу? А вдруг ты будешь жить так же пусто и бессмысленно, как миллионы людей?\nПросто пойми одну важную вещь: твои возможности не ограниченны ничем и никем, кроме тебя. Пойми, что ты на самом деле боишься, просто боишься, банальный страх приземляет все твои порывы взлететь. Но бояться – не значит быть трусом. Быть трусом – значит бездействовать. Если ты думаешь, что мне не страшно, ты сильно заблуждаешься. Я постоянно боюсь. Но мне ничто так не страшно, как обычная жизнь. Меня ничто так не пугает, как быть забытой после смерти. И ничто мне так не чуждо, как ограниченность четырьмя стенами, как однообразный ежедневный быт. Вот, я с 8 до 8 на работе. зайду в магазин, посижу в кафешке с друзьями, после уткнусь в монитор на пару часов. Вот, я усну и проснусь и всё по новой.</p>\n<p>А мечты – для подростков. Но вот, что я тебе хочу сказать: стереотип про мечты и подростков существует лишь благодаря тому, что ты про свою забыл. Да, ты просто боишься признать, что боишься жить неравнодушно, потому что боишься обжечься в очередной раз, когда что-то не получится. Жить равнодушно и равнодушно умереть. Ты перестал верить в мечту, а после – в себя. Ты отказался любить, потому что тебя однажды предали и отказался творить, потому что однажды не вышло. Но ты же не отказался от жизни лишь потому, что можешь умереть? Неудача – признак стараний, а конфликт – любви. Ты можешь и дальше бояться упасть, можешь бояться быть собой, можешь много чего бояться. Но тогда просто признай, что дело не в ограниченных возможностях, а в одноименном эффекте, которому ты поддался.</p>","publicdate":{"$date":{"$numberLong":"1547071200000"}},"preview":"<p>Ты отказался любить, потому что тебя однажды предали и отказался творить, потому что однажды не вышло. Но ты же не отказался от жизни лишь потому, что можешь умереть? Неудача – признак стараний, а конфликт – любви. Ты можешь и дальше бояться упасть, можешь бояться быть собой, можешь много чего бояться. Но тогда просто признай, что дело не в ограниченных возможностях, а в одноименном эффекте, которому ты поддался.</p>","image":"./src/img/covers/article1.jpg","__v":{"$numberInt":"0"}},
+                {"_id":{"$oid":"5daa02b7fbb2bf916c841309"},"name":"Ритм","section":"Poem","genre":"Heart-to-heart","author":"Vitaliy Kotkin","text":"<p>Интересно что тебе снится?</p>\n<p>Миксер сломанный на кухне?</p>\n<p>Или свечи что давно потухли?</p>\n<p>Чьих воск, стал будто кремень,</p>\n<p>А фитиль похожим был на цепи,</p>\n<p>Они сковали даже свет,</p>\n<p>А их сковал миксер сломанный в ответ,</p>\n<p>Или вдруг мельком я?</p>\n<p>Лишь на миг, один момент,</p>\n<p>Но стало легче, проще</p>\n<p>Смотреть вперёд, чуть ниже,</p>\n<p>Где глаза твои же,</p>\n<p>Смотрели в сторону заката,</p>\n<p>Горящего в пламени плаката,</p>\n<p>Что закрывал дыры в стенах,</p>\n<p>А сейчас просто порванный повис.</p>\n<p>А может, поезда колесный стук?</p>\n<p>Тук-тук, тук-тук,</p>\n<p>Он в ритм сердца бьётся твоего,</p>\n<p>Сражается во имя дамы,</p>\n<p>Или всеми позабытой славы,</p>\n<p>Та нет, отнюдь,</p>\n<p>Просто возьми и забудь,</p>\n<p>Как проснешься не вспоминай,</p>\n<p>Иди тихо, спокойно, позавтракай,</p>\n<p>И забудь, как, меня, зовут..</p>","publicdate":{"$date":{"$numberLong":"1575925200000"}},"preview":"","image":"./src/img/covers/poem1.jpg","__v":{"$numberInt":"0"}},
+                {"_id":{"$oid":"5daa054efbb2bf916c84130a"},"name":"Мотивация","section":"Article","genre":"Social issues","author":"Veronika Omelchuk","text":"<p>Знаешь, бывает услышишь какую-нибудь фразу, к примеру, что жизнь только одна, что пора действовать, не быть стадом, развиваться и подобные. И в этот момент тебя будто пробивает: «Всё, сегодня же брошу пить», «Завтра запишусь на курсы по английскому», «С понедельника пойду в спортзал», «Нужно найти работу» и много, много всего на самом деле бессмысленного. Бессмысленного до тех пор, пока не найдёшь смысл, как бы очевидно не звучало.</p>\n<p>Мы часто придумываем планы на день, может, даже на месяц или год, но они не несут в себе никакой ценности. Это просто расписание быта: сходить на работу, пообедать, в зал, потом на вечеринку с друзьями, найти другую работу и других друзей, переехать в другой город. И, проживая так день за днём, а после год за годом, ты посмотришь то же самое видео и услышишь ту же самую «мотивирующую» фразу, и подумаешь: «Блин, надо записаться на курсы», «Чёрт, а я ведь забросил зал» и не поймёшь, в чём подвох. Почему ты тогда вдохновился, но сейчас остался на том же месте? Почему вдохновился сейчас, но и на следующий год ничего не изменится? Потому, что ты не нашел смысл.</p>\n<p>Эти фразы вдохновляют, это правда. Но когда вдохновение проходит, ты остаёшься ни с чем. А оно непременно пройдёт, это такая же эмоция, как грусть или радость. Но бывают такие фразы, такие моменты, когда тебя осеняет мысль: «Вот, чего я хочу от жизни, это моё». И после них твоя жизнь никогда не станет прежней, просто потому, что в ней появился смысл. Появилась мотивация. Мотивация длиною в жизнь, а не вдохновение. Тогда в моменты счастья ты продолжаешь воплощать свой смысл в жизнь. В моменты разочарования и отчаяния ты делаешь своё любимое дело. В любой момент. Тебе больше не нужно вдохновение, чтобы действовать. Ты просто делаешь, потому что точно знаешь, зачем ты это делаешь.</p>\n<p>Да, будут моменты, когда тебе покажется, что всё это бессмысленно, но ты не сможешь послать это дело к чёрту, ты вскоре придёшь в себя и продолжишь. Однажды, погрязнув в быту на месяц или несколько лет, ты об этом забудешь, забудешь, зачем живешь. Абсурдно, правда? Но будут и такие моменты. Потом вспомнишь и снова начнёшь жить. </p>\n<p>Сложно сказать, что именно это будет, какая такая деятельность. Но это точно не конечные цели. Смысл жизни, к сожалению, вещь недосягаемая. Эта та самая цель в твоей жизни, которую ты никогда не сможешь достичь. А ходить в зал три раза в неделю вещь вполне реальная, найти работу, переехать… Невозможно достичь такой цели, как делать музыку, ты можешь бесконечно создавать новые мелодии, до самой смерти. И такого стремления, как мотивация других людей. Ты можешь менять отрасли, жанры, позиции, но твой смысл жизни навсегда останется константой.</p>","publicdate":{"$date":{"$numberLong":"1573333200000"}},"preview":"<p>Пора действовать, не будь стадом, развивайся! Эти фразы вдохновляют, это правда. Но когда вдохновение проходит, ты остаёшься ни с чем. А оно непременно пройдёт, это такая же эмоция, как грусть или радость. Но бывают такие фразы, такие моменты, когда тебя осеняет мысль: «Вот, чего я хочу от жизни, это моё». И после них твоя жизнь никогда не станет прежней, просто потому, что в ней появился смысл. Появилась мотивация. Мотивация длиною в жизнь, а не вдохновение. Тогда в моменты счастья ты продолжаешь воплощать свой смысл в жизнь. В моменты разочарования и отчаяния ты делаешь своё любимое дело. В любой момент. Тебе больше не нужно вдохновение, чтобы действовать. Ты просто делаешь, потому что точно знаешь, зачем ты это делаешь.</p>","image":"./src/img/covers/article2.jpg","__v":{"$numberInt":"0"}},
+                {"_id":{"$oid":"5daa06bcfbb2bf916c84130b"},"name":"Величие","section":"Book","genre":"Social issues","author":"Veronika Omelchuk","text":"<p>Знаешь, бывает услышишь какую-нибудь фразу, к примеру, что жизнь только одна, что пора действовать, не быть стадом, развиваться и подобные. И в этот момент тебя будто пробивает: «Всё, сегодня же брошу пить», «Завтра запишусь на курсы по английскому», «С понедельника пойду в спортзал», «Нужно найти работу» и много, много всего на самом деле бессмысленного. Бессмысленного до тех пор, пока не найдёшь смысл, как бы очевидно не звучало.</p>\n<p>Мы часто придумываем планы на день, может, даже на месяц или год, но они не несут в себе никакой ценности. Это просто расписание быта: сходить на работу, пообедать, в зал, потом на вечеринку с друзьями, найти другую работу и других друзей, переехать в другой город. И, проживая так день за днём, а после год за годом, ты посмотришь то же самое видео и услышишь ту же самую «мотивирующую» фразу, и подумаешь: «Блин, надо записаться на курсы», «Чёрт, а я ведь забросил зал» и не поймёшь, в чём подвох. Почему ты тогда вдохновился, но сейчас остался на том же месте? Почему вдохновился сейчас, но и на следующий год ничего не изменится? Потому, что ты не нашел смысл.</p>\n<p>Эти фразы вдохновляют, это правда. Но когда вдохновение проходит, ты остаёшься ни с чем. А оно непременно пройдёт, это такая же эмоция, как грусть или радость. Но бывают такие фразы, такие моменты, когда тебя осеняет мысль: «Вот, чего я хочу от жизни, это моё». И после них твоя жизнь никогда не станет прежней, просто потому, что в ней появился смысл. Появилась мотивация. Мотивация длиною в жизнь, а не вдохновение. Тогда в моменты счастья ты продолжаешь воплощать свой смысл в жизнь. В моменты разочарования и отчаяния ты делаешь своё любимое дело. В любой момент. Тебе больше не нужно вдохновение, чтобы действовать. Ты просто делаешь, потому что точно знаешь, зачем ты это делаешь.</p>\n<p>Да, будут моменты, когда тебе покажется, что всё это бессмысленно, но ты не сможешь послать это дело к чёрту, ты вскоре придёшь в себя и продолжишь. Однажды, погрязнув в быту на месяц или несколько лет, ты об этом забудешь, забудешь, зачем живешь. Абсурдно, правда? Но будут и такие моменты. Потом вспомнишь и снова начнёшь жить. </p>\n<p>Сложно сказать, что именно это будет, какая такая деятельность. Но это точно не конечные цели. Смысл жизни, к сожалению, вещь недосягаемая. Эта та самая цель в твоей жизни, которую ты никогда не сможешь достичь. А ходить в зал три раза в неделю вещь вполне реальная, найти работу, переехать… Невозможно достичь такой цели, как делать музыку, ты можешь бесконечно создавать новые мелодии, до самой смерти. И такого стремления, как мотивация других людей. Ты можешь менять отрасли, жанры, позиции, но твой смысл жизни навсегда останется константой.</p>","publicdate":{"$date":{"$numberLong":"1547067600000"}},"preview":"<p>А к чему эта цель: стать великой, многим запомниться, к чему? Я же хотела вдохновлять людей, но тут не нужно величие. Да и не понятно вовсе, что это значит: быть великим. Это что? Это когда с тобой происходит? Когда количество твоих поклонников достигает тысячи или миллиона? Когда ты смело делаешь что-то вопреки всем устоям и нормам, или когда изо всех сил пытаешься сохранить традиции? Может в тот момент, когда кто-то назовёт тебя великим или когда ты почувствуешь себя таковым? В какой момент времени ты воплотишь свою странную мечту в жизнь?</p>","image":"./src/img/covers/book1.jpg","__v":{"$numberInt":"0"}}
+            ]
         }
     },
     methods : {
-
+        diff: function(arr1, arr2) {
+            return arr1.filter(value => -1 !== arr2.indexOf(value));
+        }
     },
     mounted(){
         Vue.axios.get('http://localhost:3000/works').then(response => {
             console.log(response.data);
-            this.works = response.data;
+            this.works1 = response.data;
         })
     }
 }
+
 </script>
 
-<style>
-    @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,900,100,200);
-
-body{
-  font-family: 'Raleway', sans-serif;
-  font-size:14px;
-  font-weight: 400;
-  overflow-y:scroll;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-		background: #000;
-		color: #fff;
-		text-shadow: none;
-	}
-	
-	::-moz-selection {
-		background: #000;
-		color: #fff;
-		text-shadow: none;
-	}
-
-p{
-  font-family: 'Raleway', sans-serif;
-  font-size:14px;
-  font-weight: 400;
-}
-
-a{
-  text-decoration:none;
-  -webkit-transition: all 0.2s ease-in;
-	-moz-transition: all 0.2s ease-in;
-	-ms-transition: all 0.2s ease-in;
-	-o-transition: all 0.2s ease-in;
-	transition: all 0.2s ease-in; 
-	border-bottom:1px solid #dedede;
-}
-
-a:focus {
-  outline:none;
-}
-
-strong{
-  font-weight:700;
-
-}
-
-/*
-**************************
-PRELOADER
-**************************
-*/
-/* 
-.preloader{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:100%;
-  background:white;
-  z-index:999;
-}
- 
-.preloader .item{
-  position:absolute;
-  width:50px;
-  height:50px;
-  left:50%;
-  top:50%;
-  margin-left:-25px;
-  margin-top:-25px;
-} 
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 0px auto;
-  background-color: #333;
-  border-radius: 100%;  
-  -webkit-animation: scaleout 1.0s infinite ease-in-out;
-  animation: scaleout 1.0s infinite ease-in-out;
-}
-
-@-webkit-keyframes scaleout {
-  0% { -webkit-transform: scale(0.0) }
-  100% {
-    -webkit-transform: scale(1.0);
-    opacity: 0;
-  }
-}
-
-@keyframes scaleout {
-  0% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 100% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-    opacity: 0;
-  }
-} */
-
-
-
-
-
-/*
-**************************
-NAVIGATION OPACITY
-**************************
-*/
-
-
-
-.opacity-nav{
-  position:fixed;
-  display:none;
-  width:100%;
-  height:100%;
-  top:0;
-  z-index:9999;
-  background:rgba(0,0,0,0.95);
-}
-
-ul.menu-fullscreen{
-  width: 100%;
-  top: 50%;
-  position: absolute;
-  height: 280px;
-  margin-top: -140px;
-}
-
-ul.menu-fullscreen li{
-  font-size:35px;
-  text-align:center;
-  line-height:70px;
-  font-weight:500;
-}
-
-ul.menu-fullscreen li > a{
-  color:#999999;
-  border:0;
-}
-
-ul.menu-fullscreen li > a:hover{
-  color:#ffffff;
-}
-
-
-#full{
-  width:1140px;
-  position: relative;
-  top:0;
-  margin:0 auto;
-  z-index: 9997;
-}
-
-
-#fullscreen{
-  display:none;
-  position:absolute;
-  top:0;
-  width:100%;
-  margin:0 auto;
-  height:80px;
-  z-index: 9998;
-}
-
-/*
-**************************
-HEADER
-**************************
-*/
-
-header.boxed{
-  position:fixed;
-  width:100%;
-  margin:0 auto;
-  height:80px;
-  z-index:9999;
-  display:none;
-  background:none;
-  top:0;
-    -webkit-transition: background 0.2s ease-in;
-	-moz-transition: background 0.2s ease-in;
-	-ms-transition: background 0.2s ease-in;
-	-o-transition: background 0.2s ease-in;
-	transition: background 0.2s ease-in; 
-}
-
-header.boxed .header-margin{
-  width:1140px;
-  margin:0 auto;
-}
-
-header.boxed .header-margin-mini{
-  width:90%;
-  margin:0 auto;
-}
-
-
-ul.social-icon{
-  float:right;
-}
-
-ul.social-icon a{
-  float:right;
-  font-size:15px;
-  border-bottom:0;
-  color:black;
-  padding-right:0px !important;
-}
-
-ul.social-icon a:hover{
-  color:#c3c3c3;
-}
-
-.menu-index{
-  position: fixed;
-  right: 5%;
-  top: 30px;
-  z-index: 99999;
-  padding:20px;
-  background:black;
-  cursor:pointer;
-}
-
-
-.menu-index i{
-  float:right;
-  font-size:18px;
-  color:white;
-  padding-right:0px !important;
-}
-
-.menu-index i:hover{
-  color:#c3c3c3;
-}
-
-
-ul.menu-icon{
-  float:right;
-}
-
-ul.menu-icon a{
-  float:right;
-  font-size:19px;
-  color:white;
-  padding-right:0px !important;
-}
-
-ul.menu-icon i{
-  padding:20px;
-  background:black;
-}
-
-ul.menu-icon a:hover{
-  color:#c3c3c3;
-}
-
-header a{
-  color:#000000;
-}
-
-ul.header-nav{
-  width:60%;
-  float:left;
-}
-
-header .logo > a{
-  font-size:23px;
-  font-weight:800;
-  float:left;
-  line-height:80px;
-  padding-right:40px;
-  border-bottom: 1px solid #f1f1f1;
-}
-
-header .logo > a:hover{
-  color:#c3c3c3;
-}
-
-header li{
-  text-transform:uppercase;
-  list-style-type: none; margin: 0 auto; float: left;
-}
-
-header li > a{
-  font-size:13px;
-  color:#c3c3c3;
-  padding-right:25px;
-  padding-left:25px;
-  font-weight:800;
-  line-height:80px;
-  display:inline-block;  
-  border-bottom:0;
-}
-
-header li > a:hover{
-  color:#000000;
-}
-
-header li > a #active{
-  color:#000000;
-}
-
-header li ul{
-  overflow: hidden; display: none; background: #f9f9f9; z-index:20;
-}
-
-header li ul li a{
-  line-height:50px;
-  padding-left:30px; 
-  width:260px;
-}
-
-header li:hover ul{
-  position: absolute; padding: 0; display: block; width: 260px;
-}
-
-
-
-/*
-**************************
-CONTENT
-**************************
-*/
-
-.hero-image{
-  position:relative; 
-  width:100%; 
-  top:0; 
-  height:400px; 
-  /* background: url('../img/full/full.jpg') center center; */
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;  
-  
-}
-
-.one-column{
-  width:40%;
-  position:relative;
-  float:left;
-}
-
-.two-column{
-  width:60%;
-  position:relative;
-  float:left;
-}
-
-.one-column p{
-  width:70% !important;
-}
-
-.two-column p{
-  width:100% !important;
-}
-
-.clear{
-  clear:both;
-}
-
-.content{
-  position:relative;
-  width:1140px;
-  margin:50px auto;
-}
-
-
-.content .text-intro{
-  width: 1140px;
-  margin-top: 150px;
-  margin: 150px auto 0;
-}
-
-.content .text-intro h1{
-  font-size:43px;
-  width:40%;
-  text-transform:uppercase;
-  color:#000000;
-  font-weight:900;
-  line-height:70px;
-}
-
-.content .text-intro p{
-  font-size:13px;
-  color:#797979;
-  margin-top:20px;
-  font-weight:400;
-  line-height:22px;
-  letter-spacing:1px;
-  width:100%;
-}
-
-.content .text-intro .crop-container {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.content .text-intro .crop-container img {
-    margin-top: -200px;
-    margin-bottom: -200px;
-}
-
-.content .text-intro .text p{
-
-}
-
-        .typed-cursor{
-            opacity: 1;
-            font-weight: 900;
-            -webkit-animation: blink 0.7s infinite;
-            -moz-animation: blink 0.7s infinite;
-            -ms-animation: blink 0.7s infinite;
-            -o-animation: blink 0.7s infinite;
-            animation: blink 0.7s infinite;
-        }
-        @-keyframes blink{
-            0% { opacity:1; }
-            50% { opacity:0; }
-            100% { opacity:1; }
-        }
-        @-webkit-keyframes blink{
-            0% { opacity:1; }
-            50% { opacity:0; }
-            100% { opacity:1; }
-        }
-        @-moz-keyframes blink{
-            0% { opacity:1; }
-            50% { opacity:0; }
-            100% { opacity:1; }
-        }
-        @-ms-keyframes blink{
-            0% { opacity:1; }
-            50% { opacity:0; }
-            100% { opacity:1; }
-        }
-        @-o-keyframes blink{
-            0% { opacity:1; }
-            50% { opacity:0; }
-            100% { opacity:1; }
-        }
-
-/*
-**************************
-HOME SIDEBAR
-**************************
-*/
-
-.home-sidebar{
-  top:0;
-  position:absolute;
-  width:33.3333%;
-  right:0;
-  height:100%;
-  background:#f4f4f4;
-  z-index:9;
-  overflow:hidden;
-  background-size:100%;
-}
-
-.parallax{
-  position:absolute;
-}
-
-.parallax-option{
-  position:absolute; width:100%; height:100%;
-}
-
-/*
-**************************
-PORTFOLIO GRID
-**************************
-*/
-
-.prev-next{
-  width:100%;
-  max-width:1170px;
-  margin:0 auto;
-  padding-top:100px;
-}
-
-.prev-next a{
-  color:black;
-  font-weight:500;
-  padding-bottom: 15px;
-}
-
-.prev-next a:hover{
-  border-bottom:1px solid black;
-}
-
-.prev-button{
-  width:50%;
-  position:relative;
-  float:left;
-  text-align:left;
-}
-
-.next-button{
-  width:50%;
-  position:relative;
-  float:left;
-  text-align:right;
-}
-
-
-#ajax-content{width:100%;}
-
-.portfolio-grid{
-  width:1170px;
-  position:relative;
-  margin: 30px auto;
-  overflow:hidden;
-}
-
-#portfolio-sidebar{
-  width: 780px !important;
-  padding-right: 390px;
-
-}
-
-li.grid-item{
-  width:360px;
-  position:relative;
-  float:left;
-  padding:15px;
-}
-
-.grid-hover{
-  position: absolute;
-  width:360px;
-  height: 100%;
-  top:0;
-  background: white;
-  z-index: 2;
-  opacity: 0;
-  -webkit-transition: all 0.2s ease-in;
-	-moz-transition: all 0.2s ease-in;
-	-ms-transition: all 0.2s ease-in;
-	-o-transition: all 0.2s ease-in;
-	transition: all 0.2s ease-in; 
-}
-
-.grid-hover:hover{
-  opacity: 0.9;
-}
-
-.grid-hover h1{
-  font-size:23px;
-  bottom:80px;
-  left:40px;
-  position:absolute;
-  text-transform:uppercase;
-  color:#000000;
-  letter-spacing:1px;
-  font-weight:900;
-  line-height:50px;
-}
-
-.grid-hover p{
-  font-size:13px;
-  bottom:40px;
-  left:40px;
-  position:absolute;
-  color:#686868;
-  letter-spacing:1px;
-  font-weight:400;
-  line-height:50px;
-}
-
-li.grid-item img{
-  width:360px;
-}
-
-/*
-**************************
-FOOTER
-**************************
-*/
-
-#footer-box{height:150px; margin-top:75px;}
-
-footer{
-  background: #f1f1f1;
-  width:100%;
-  margin-top:150px;
-  height:300px;
-  overflow:hidden;
-  position:relative;
-  z-index:10;
-}
-
-.footer-margin{
-  width:1140px;
-  margin: 30px auto;
-  line-height: 100px;
-}
-
-#footer-left{text-align:left;}
-
-.footer-margin .copyright{
-  color: #686868;
-  letter-spacing: 1px;
-  font-size: 12px;
-  width: 100%;
-  text-align:center;
-  float: left;
-}
-
-.footer-margin .social-footer{
-  color: #686868;
-  letter-spacing: 1px;
-  font-size: 13px;
-  width: 100%;
-  text-align:center;
-  float: left;
-}
-
-.footer-margin .social-footer a{
-  font-size:15px;
-  color:black;
-  padding: 20px;
-}
-
-.footer-margin .social-footer a:hover{
-  color:#c3c3c3;
-}
-
-
-/*
-**************************
-CONTACT
-**************************
-*/
-
-.contact-one, .contact-two{
-  width:30%;
-  padding-right:3%;
-  position:relative;
-  float:left;
-}
-
-.contact-three{
-  width:33%;
-  position:relative;
-  float:left;
-}
-
-.contact-one p, .contact-two p, .contact-three p{
-  width:100% !important;
-}
-
-input{
-
-  width:100%;
-  height:40px;
-  background:#f8f7f7;
-  border:0;
-  color:#000000;
-  font-weight:500;
-  line-height:40px;
-  font-family: 'Raleway', sans-serif;
-  margin-bottom:10px;
-  font-size:13px;
-  padding-left:15px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
-}
-
-input.button-submit{
-
-  width:220px;
-  height:40px;
-  background:#f8f7f7;
-  font-weight:500;
-  border:0;
-  font-family: 'Raleway', sans-serif;
-  color:#000000;
-  float:right;
-  font-weight:900;
-  line-height:40px;
-  font-size:13px;
-}
-
-input:focus{
-  background:#f4f4f4; 
-}
-
-textarea{
-
-  width:100%;
-  height:40px;
-  border:0;
-  line-height:40px;
-  background:#f8f7f7;
-  color:#000000;
-  font-size:13px;
-  font-family: 'Raleway', sans-serif;
-  font-weight:500;
-  margin-bottom:10px;
-  padding:0 0 0 15px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
-    -webkit-transition: all 0.2s ease-in;
-	-moz-transition: all 0.2s ease-in;
-	-ms-transition: all 0.2s ease-in;
-	-o-transition: all 0.2s ease-in;
-	transition: all 0.2s ease-in; 
-}
-
-textarea:focus{background:#f4f4f4; height:250px;}
-
-
-/* Large Devices, Wide Screens */
-@media only screen and (max-width : 1200px) {
-	.header.boxed .header-margin{
-		float: none !important;
-	}
-}
-
+<style scoped>
 </style>

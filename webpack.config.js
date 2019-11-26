@@ -3,7 +3,9 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // var fs = require('fs');
 var modernizr = require("modernizr");
- 
+var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
+
+
 modernizr.build({}, function (result) {
   console.log(result); // the build
 });
@@ -30,6 +32,7 @@ module.exports = {
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: 'index.html'
-        })
+        }),
+        new ModernizrWebpackPlugin()
     ],
 }
