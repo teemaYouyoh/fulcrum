@@ -1,45 +1,6 @@
 <template>
     <div>
-       <div class="header">
-   <div class="container">
-    <h2 class="logo">FULCRUM</h2>
-    <input type="checkbox" id="chk">
-    <label for="chk" class="show-menu-btn">
-      <i class="fas fa-align-justify"></i>
-    </label>
-
-    <ul class="menu">
-      <div class="linksHeader">
-          <a href="#"><i class="fas fa-search"></i></a>
-          <router-link :to="'/login'"><i class="fas fa-user"></i></router-link> 
-          <a href="#"><i class="fas fa-plus"></i></a>
-          <a href="#"><i class="fas fa-home"></i></a>
-      </div>
-
-      <div class="socialHeader">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-
-      <!-- <a href="#"><i class="fab fa-telegram"></i></a> -->
-
-      <label for="chk" class="hide-menu-btn">
-        <i class="fas fa-times"></i>
-      </label>
-    </ul>
-    </div>
-  </div>
-
-  <div class="subHeader">
-    <div class="container">
-      <div class="navSubHeader">
-        <div class="subHeaderCategory">Category</div>
-        <div class="subHeaderKind">Kind</div>
-        <div class="subHeaderAuthor">Author</div>
-        <div class="subHeaderSort">Sort</div>
-      </div>
-    </div>
-  </div>
+  <Header/>
    
    <div class="content">
        <div class="container">
@@ -64,14 +25,7 @@
             </ul>
        </div>
    </div>
-   
-   <div class="footer">
-       <div class="container">
-           <div class="bookFooter"></div>
-           <p>fulcrum</p>
-       </div>
-   </div>
-
+    <Footer/>
     </div>
 </template>
 
@@ -82,12 +36,16 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import VueTypedJs from 'vue-typed-js';
 import Typed from 'typed.js';
- 
+
+import Header from './Header.vue' 
+import Footer from './Footer.vue' 
 
 Vue.use(VueAxios, axios)
 
 export default {
     components : {
+      Header,
+      Footer
 	},
     data(){
         return{
@@ -118,4 +76,114 @@ export default {
 </script>
 
 <style scoped>
+
+/* CONTENT */
+
+.content{
+    position: relative;
+    padding-bottom: 3%;
+    background: #2b2b2b;
+}
+
+.mainContentP{
+    padding-top: 5%;
+    font-size: 43px;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 70px;
+    width: 40%;
+    padding-left: 2.5%;
+}
+
+.infoProjContent{
+  font-size:13px;
+  color:#797979;
+  margin-top:20px;
+  font-weight:400;
+  line-height:22px;
+  letter-spacing:1px;
+  width:100%;
+  padding-left: 2.5%;
+}
+
+/*
+.mainContentP{
+  font-size:43px;
+  text-transform:uppercase;
+  color:#000000;
+  font-weight:900;
+  line-height:70px;
+}
+*/
+
+
+
+/* 
+************************
+GRID CONTENT 
+************************
+*/
+
+.portfolio-grid{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-around; 
+  overflow:hidden;
+}
+
+li.grid-item{
+  width: 33%;
+  position:relative;
+  float:left;
+  padding:15px;
+  
+}
+
+.grid-hover{
+  position: absolute;
+  width:360px;
+  height: 100%;
+  top:0;
+  background: white;
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in; 
+}
+
+.grid-hover:hover{
+  opacity: 0.9;
+}
+
+.grid-hover h1{
+  font-size:23px;
+  bottom:80px;
+  left:40px;
+  position:absolute;
+  text-transform:uppercase;
+  color:#000000;
+  letter-spacing:1px;
+  font-weight:900;
+  line-height:50px;
+}
+
+.grid-hover p{
+  font-size:13px;
+  bottom:40px;
+  left:40px;
+  position:absolute;
+  color:#686868;
+  letter-spacing:1px;
+  font-weight:400;
+  line-height:50px;
+}
+
+li.grid-item img{
+  width:360px;
+}
 </style>

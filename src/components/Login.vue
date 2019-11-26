@@ -1,101 +1,167 @@
 <template>
     <div>
-        <div class="header">
-       <div class="container">
-            <h2 class="logo">FULCRUM</h2>
-            <input type="checkbox" id="chk">
-            <label for="chk" class="show-menu-btn">
-              <i class="fas fa-align-justify"></i>
-            </label>
-            <ul class="menu">
-              <div class="linksHeader">
-                  <a href="#"><i class="fas fa-search"></i></a>
-                  <a href="#"><i class="fas fa-user"></i></a>
-                  <a href="#"><i class="fas fa-plus"></i></a>
-                  <a href="#"><i class="fas fa-home"></i></a>
-              </div>
-              <div class="socialHeader">
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-              </div>
-              <!-- <a href="#"><i class="fab fa-telegram"></i></a> -->
-              <label for="chk" class="hide-menu-btn">
-                <i class="fas fa-times"></i>
-              </label>
-            </ul>
+        <Header/>
+        <div class="clear"></div>
+
+        <div class="login" id="ajax-content">
+
+            <div class="text-intro" id="site-type">
+
+                <div class="login-box">
+                    <h1>Login</h1>
+                    <div class="textbox">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Username">
+                    </div>
+
+                    <div class="textbox">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password">
+                        <i class="fas fa-eye"></i>
+                    </div>
+
+                    <input type="button" class="btn" value="Sign in">
+                    <p class="signUpLog">Don't have account? <span> Sign up </span></p>
+                </div>
+                
+                
+                <div class="reg-box">
+                    <h1>Sign Up</h1>
+                    <div class="textbox">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Username">
+                    </div>
+                    
+                    <div class="textbox">
+                        <i class="fas fa-envelope"></i>
+                        <input type="text" placeholder="E-mail">
+                    </div>
+                        
+                    <div class="textbox">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password">
+                        <i class="fas fa-eye"></i>
+                    </div>
+
+                    <input type="button" class="btn" value="Sign up">
+                    <p class="signUpLog">Already have account? <span> Sign in </span></p>
+                </div>
+            </div>
+        <!--Portfolio grid-->
+
         </div>
-    </div>
-<div class="clear"></div>
-
-
-
-<div class="login" id="ajax-content">
-
-      <div class="text-intro" id="site-type">
-
-        <div class="login-box">
-              <h1>Login</h1>
-              <div class="textbox">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Username">
-              </div>
-
-              <div class="textbox">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password">
-                <i class="fas fa-eye"></i>
-              </div>
-
-              <input type="button" class="btn" value="Sign in">
-              <p class="signUpLog">Don't have account? <span> Sign up </span></p>
-        </div>
-        
-        
-        <div class="reg-box">
-              <h1>Sign Up</h1>
-              <div class="textbox">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Username">
-              </div>
-              
-              <div class="textbox">
-                 <i class="fas fa-envelope"></i>
-                  <input type="text" placeholder="E-mail">
-              </div>
-                  
-              <div class="textbox">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password">
-                <i class="fas fa-eye"></i>
-              </div>
-
-              <input type="button" class="btn" value="Sign up">
-              <p class="signUpLog">Already have account? <span> Sign in </span></p>
-        </div>
-    </div>
-<!--Portfolio grid-->
-
-</div>
 
 
 
 
-    <div class="footer">
-       <div class="container">
-           <div class="bookFooter"></div>
-           <p>fulcrum</p>
-       </div>
-    </div>
+            <Footer/>
     
     </div>
 </template>
 
 <script>
+
+import Header from './Header.vue' 
+import Footer from './Footer.vue' 
 export default {
+    components : {
+        Header,
+        Footer
+    }
     
 }
 </script>
 
-<style>
+<style scoped>
 
+/* 
+*******************
+LOGIN MENU
+*******************
+*/
+.login{
+     background: url(/src/img/bg2.jpeg)center no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.signUpLog{
+    text-align: center;
+    font-size: 2.35rem;
+    color: #fff;
+    font-weight: 600;
+    padding-bottom: 15%;
+}
+
+.signUpLog span{
+    color: brown;
+}
+
+
+.login-box,
+.reg-box{
+  width: 280px;
+    margin: 0 auto;
+  color: white;
+}
+.login-box h1,
+.reg-box h1{
+  text-align: center;
+  font-size: 30px;
+  border-bottom: 6px solid #f5f5f5;
+  margin-bottom: 50px;
+  padding: 13px 0;
+    padding-top: 20%;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.textbox{
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  display: flex;
+    justify-content: center;
+  border-bottom: 1px solid #f5f5f5;
+}
+.textbox i{
+    min-width: 37px;
+    padding-top: 0%;
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+}
+.fas.fa-lock{
+    font-size: 28px;
+}
+.textbox input{
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 80%;
+  margin: 0 10px;
+}
+
+.btn{
+  width: 100%;
+  background: none;
+  border: 2px solid #f5f5f5;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 5%;
+  padding: 10px;
+}
+
+.content .text-intro p, .login .text-intro p {
+    font-size: 13px;
+    color: #797979;
+    margin-top: 20px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 1px;
+    width: 100%;
+}
 </style>
