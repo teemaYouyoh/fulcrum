@@ -20,6 +20,10 @@
                         <i class="fas fa-eye"></i>
                     </div>
 
+                    <div class="textbox" id="textAreaLogin">
+                        <input type="textarea" placeholder="Enter information about yourself">
+                    </div>
+
                     <input type="button" class="btn" value="Sign in">
                     <p class="signUpLog">Don't have account? <span> Sign up </span></p>
                 </div>
@@ -130,6 +134,7 @@ LOGIN MENU
     display: flex;
     justify-content: flex-start;
     text-align: center;
+    padding-left: 2%;
 }
 .fas.fa-lock{
     font-size: 28px;
@@ -163,5 +168,10 @@ LOGIN MENU
     line-height: 22px;
     letter-spacing: 1px;
     width: 100%;
+}
+
+#textAreaLogin{
+    min-height: 100px;
+    border-bottom: 1px solid #797979;
 }
 </style>

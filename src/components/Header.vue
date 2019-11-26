@@ -10,7 +10,7 @@
 
         <ul class="menu">
           <div class="linksHeader">
-              <a href="#"><i class="fas fa-search"></i></a>
+              <a href="#"><i class="fas fa-search" @click="isActiveSubHeaderFunction()"></i></a>
               <router-link :to="'/login'"><i class="fas fa-user"></i></router-link>
               <a href="#"><i class="fas fa-plus"></i></a>
               <a href="#"><i class="fas fa-home"></i></a>
@@ -30,7 +30,7 @@
         </div>
       </div>
       
-    <div class="subHeader">
+    <div class="subHeader" v-if="isActiveSubHeader==true">
       <div class="container">
         <div class="navSubHeader">
           <div class="subHeaderCategory">Category</div>
@@ -42,6 +42,25 @@
     </div>
     </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return{
+      isActiveSubHeader: false
+    }
+  },
+  methods:{
+    isActiveSubHeaderFunction(){
+      if(this.isActiveSubHeader==true)
+      this.isActiveSubHeader = false;
+      else if(this.isActiveSubHeader==false)
+      this.isActiveSubHeader = true;
+      return this.isActiveSubHeader;
+    }
+  }
+}
+</script>
 
 <style scoped>
 
@@ -60,6 +79,7 @@
   text-transform: uppercase;
   font-size: 36px;
   cursor: pointer;
+  color: #fff;
 }
 
 .linksHeader{

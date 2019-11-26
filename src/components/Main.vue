@@ -173,6 +173,11 @@ li.grid-item{
   line-height:50px;
 }
 
+.grid-hover h1 a{
+  color: #000;
+  text-decoration: none;
+}
+
 .grid-hover p{
   font-size:13px;
   bottom:40px;
