@@ -13,7 +13,7 @@
               <a href="#"><i class="fas fa-search" @click="isActiveSubHeaderFunction()"></i></a>
               <router-link :to="'/login'"><i class="fas fa-user"></i></router-link>
               <a href="#"><i class="fas fa-plus"></i></a>
-              <a href="#"><i class="fas fa-home"></i></a>
+              <router-link :to="'/'"><i class="fas fa-home"></i></router-link>
           </div>
 
           <div class="socialHeader">
@@ -165,4 +165,9 @@ export default {
   margin-right: 3.5%;
 }
 
+@media screen and (max-width:800px) {
+  .show-menu-btn,.hide-menu-btn{
+    display: block;
+   }
+}
 </style>
