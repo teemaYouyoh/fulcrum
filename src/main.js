@@ -8,13 +8,15 @@ import App from './components/App.vue'
 import Main from './components/Main.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
+import OnePage from './components/OnePage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     { path : '/', component : Main},
     { path : '/login', component : Login},
-    { path : '/profile/:id', component : Profile}
+    { path : '/profile/:id', component : Profile},
+    { path : '/singlePage', component: OnePage}
 ]
 
 const router = new VueRouter({
