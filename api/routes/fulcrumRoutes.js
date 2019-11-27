@@ -16,8 +16,8 @@ module.exports = function(app) {
     .put(fulcrum.update_a_work)
     .delete(fulcrum.delete_a_work);
 
-  app.route('/user/:userId')
-    .get(fulcrum.read_a_work)
-    .put(fulcrum.update_a_work)
-    .delete(fulcrum.delete_a_work);
+  app.route('/users/:userId')
+    .get(fulcrum.read_a_user)
+    .put(fulcrum.update_a_user)
+    .delete(fulcrum.delete_a_user);
 };

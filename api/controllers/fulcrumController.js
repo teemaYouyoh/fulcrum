@@ -67,7 +67,7 @@ exports.create_a_users = function(req, res) {
 };
 
 exports.read_a_user = function(req, res) {
-  Work.findById(req.params.workId, function(err, user) {
+  User.findById(req.params.userId, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);

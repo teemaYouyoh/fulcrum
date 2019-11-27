@@ -16,7 +16,7 @@
                           <img :src="work.image">
                           <div class="grid-hover">
                             <h1><router-link :to="'/profile/'+work._id"> {{work.name}}</router-link> </h1>
-                            <p>{{work.author}}</p>
+                            <p><router-link :to="'/profile/'+work.autorId"> {{work.author}}</router-link> </p>
                           </div>
                    </div>
                 </li>

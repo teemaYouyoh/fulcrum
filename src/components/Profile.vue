@@ -5,7 +5,7 @@
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
                       <div class="profilePhoto"></div>
-                      <h2>Mionder</h2>
+                      <h2>{{user.name}}</h2>
                   </div>
                   
                   <div class="fullContentProfile">
@@ -17,7 +17,7 @@
                       
                       <div class="rightContentProfile">
                           <div class="emailContentProfile">
-                              <p class="stand">Моя поштова скринька: <span>example@gmail.com</span></p>
+                              <p class="stand">Моя поштова скринька: <span>{{user.email}}</span></p>
                           </div>
                           
                           <div class="telephoneContentProfile">
@@ -55,13 +55,13 @@ export default {
   },
   data(){
       return{
-          users : []
+          user : {}
       }
   },
   mounted(){
-      Vue.axios.get('http://localhost:3000/users').then(response => {
+      Vue.axios.get('http://localhost:3000/users/'+this.$route.params.id).then(response => {
           console.log(response.data);
-          this.users = response.data;
+          this.user = response.data;
       })
   }
 }

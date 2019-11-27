@@ -16,7 +16,7 @@ const routes = [
     { path : '/', component : Main},
     { path : '/login', component : Login},
     { path : '/profile/:id', component : Profile},
-    { path : '/singlePage', component: OnePage}
+    { path : '/singlePage/:id', component: OnePage}
 ]
 
 const router = new VueRouter({
