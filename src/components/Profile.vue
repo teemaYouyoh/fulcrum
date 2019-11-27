@@ -37,12 +37,32 @@
 </template>
 
 <script>
-  import Header from './Header.vue' 
-  import Footer from './Footer.vue' 
+
+    import Vue from "vue";
+    import Vuex from "vuex";
+    import axios from "axios";
+    import VueAxios from "vue-axios";
+
+    import Header from './Header.vue' 
+    import Footer from './Footer.vue' 
+
+    Vue.use(VueAxios, axios)
+
 export default {
   components : {
     Header,
     Footer
+  },
+  data(){
+      return{
+          users : []
+      }
+  },
+  mounted(){
+      Vue.axios.get('http://localhost:3000/users').then(response => {
+          console.log(response.data);
+          this.users = response.data;
+      })
   }
 }
 </script>

@@ -11,14 +11,13 @@
            
             <ul class="portfolio-grid" id="works">
 
-                <li v-for="work in works" class="grid-item">
+                <li v-for="work in works" class="grid-item" v-bind:key="work._id">
                    <div class="items_wrap">
                           <img :src="work.image">
-                              <div class="grid-hover">
-                                <h1><router-link :to="'/profile/'+work._id"> {{work.name}}</router-link> </h1>
-                                <p>{{work.author}}</p>
-                              </div>
-                            </a>  
+                          <div class="grid-hover">
+                            <h1><router-link :to="'/profile/'+work._id"> {{work.name}}</router-link> </h1>
+                            <p>{{work.author}}</p>
+                          </div>
                    </div>
                 </li>
 
