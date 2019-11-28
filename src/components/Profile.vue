@@ -75,6 +75,10 @@ PROFILE
 ******************************
 */
 
+.profile{
+    
+}
+
 .topProfileBar{
     background: url(/src/img/profile.jpeg)center no-repeat;
     -webkit-background-size: cover;

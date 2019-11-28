@@ -32,11 +32,26 @@
       
     <div class="subHeader" v-if="isActiveSubHeader==true">
       <div class="container">
+                  <p>Filter like you want:</p>
         <div class="navSubHeader">
-          <div class="subHeaderCategory">Category</div>
+          <!-- <div class="subHeaderCategory">Category</div>
           <div class="subHeaderKind">Kind</div>
           <div class="subHeaderAuthor">Author</div>
-          <div class="subHeaderSort">Sort</div>
+          <div class="subHeaderSort">Sort</div> -->
+
+          <div class="categorySub">
+            <select name="" id="">
+              <option value="verse">Verse</option>
+              <option value="books">Books</option>
+              <option value="article">Article</option>
+            </select>
+          </div>
+          <div class="kindSub">
+            <select name="" id="">
+              <option value="">Мустаж</option>
+            </select>
+          </div>
+
         </div>
       </div>
     </div>
@@ -71,8 +86,8 @@ export default {
   background: #2b2b2b;
   padding: 0 20px;
   color: #fff;
-
 }
+
 .logo{
   line-height: 100px;
   float: left;
@@ -143,10 +158,43 @@ export default {
   padding-bottom: 2.5%;
 }
 
-.navSubHeader{
+.subHeader p{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
 
+.categorySub select,
+.kindSub select{
+  background-color: transparent;
+  color: #fff;
+  width: 200px;
+  /* min-height: 35px; */
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 25px;
+  padding: 7%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.categorySub option,
+.kindSub option{
+  height: 20px;
+  font-size: 1rem;
+}
+
+.categorySub{
+  margin-right: 5%;
+}
+
+.navSubHeader{
+  padding-top: 3%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .subHeaderCategory,
