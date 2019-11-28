@@ -9,6 +9,7 @@ import Main from './components/Main.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
 import OnePage from './components/OnePage.vue'
+import AddWork from './components/AddWork.vue'
 
 Vue.use(VueRouter)
 
@@ -16,12 +17,14 @@ const routes = [
     { path : '/', component : Main},
     { path : '/login', component : Login},
     { path : '/profile/:id', component : Profile},
-    { path : '/singlePage/:id', component: OnePage}
+    { path : '/single-page/:id', component: OnePage},
+    { path : '/add-work', component: AddWork}
 ]
 
 const router = new VueRouter({
     routes
 })
+
 
 new Vue({
     render : h => h(App),

@@ -16,7 +16,7 @@
                           <img :src="work.image">
                           <div class="grid-hover">
                             <h1><router-link :to="'/profile/'+work._id"> {{work.name}}</router-link> </h1>
-                            <p><router-link :to="'/profile/'+work.autorId"> {{work.author}}</router-link> </p>
+                            <p><router-link :to="'/profile/'+work.authorId"> {{work.author}}</router-link> </p>
                           </div>
                    </div>
                 </li>
@@ -42,7 +42,7 @@ import Footer from './Footer.vue'
 Vue.use(VueAxios, axios)
 
 export default {
-    components : {
+  components : {
       Header,
       Footer
 	},

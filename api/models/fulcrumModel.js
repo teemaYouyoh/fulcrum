@@ -4,29 +4,37 @@ var Schema = mongoose.Schema;
 
 
 var WorkSchema = new Schema({
-  email: {
+  name: {
     type: String,
     required: 'Kindly enter the email'
   },
-  password: {
+  section: {
     type: String,
     required: 'Kindly enter the password'
   },
-  name: {
+  genre: {
     type: String,
     required: 'Kindly enter the name'
   },
-  about_u: {
+  author: {
     type: String
   },
-  regist_date: {
-    type: Date,
-    default: Date.now
-  },
-  avatar: {
+  text: {
     type: String,
     required: 'Kindly select the avatar'
-  }
+  },
+  image: {
+    type: String,
+    required: 'Kindly select the avatar'
+  },
+  authorId: {
+    type: String,
+    required: 'Kindly select the avatar'
+  },
+  date: {
+    type: String,
+    required: 'Kindly select the avatar'
+  },
 });
 
 var UserSchema = new Schema({
@@ -46,8 +54,8 @@ var UserSchema = new Schema({
     type: String
   },
   regist_date: {
-    type: Date,
-    default: Date.now
+    type: String,
+    required: 'Kindly enter the date'
   },
   avatar: {
     type: String,

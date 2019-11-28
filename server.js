@@ -2,10 +2,20 @@ var express = require('express'),
 	app = express(),
 	port = process.env.PORT || 3000,
 	mongoose = require('mongoose'),
+	cors = require('cors'),
 	Work = require('./api/models/fulcrumModel'), //created model loading here
 	// Author = require('./api/models/fulcrumModel1'),
   	bodyParser = require('body-parser');
-  
+ 
+	//  app.use(function (req, res, next) {
+	//    res.header("Access-Control-Allow-Origin", "*");
+	//    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+	//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+	//    next();
+	//  });
+
+	 app.use(cors())
+
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/fulcrumdb', {
