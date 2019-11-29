@@ -1,20 +1,40 @@
 <template>
     <div>
-        <input type="text" v-model="work.name">
-        <select name="section" v-model="work.section">
-            <option value="Poem">Poem</option>
-            <option value="Poem">Poem</option>
-            <option value="Poem">Poem</option>
-        </select>
-        <select name="genre" v-model="work.genre">
-            <option value="Social verse">Social verse</option>
-            <option value="Social verse">Social verse</option>
-            <option value="Social verse">Social verse</option>
-        </select>
-        <input type="text" v-model="work.text">
-        <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
-        <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
-        <button @click="addWork()">Add work</button>
+        <div class="fullAddWorkBlock">
+                <div class="fullSide">
+              <div class="leftSideAdd">
+                    <label for="nameOfWork">Enter the name of the work</label>
+                    <input type="text" v-model="work.name" id="nameOfWork">
+                    <label for="typePoem">Enter the type of work</label>
+                    <select name="section" v-model="work.section" id="typePoem">
+                        <option value="Poem">Poem</option>
+                        <option value="Poem">Poem</option>
+                        <option value="Poem">Poem</option>
+                    </select>
+                    <label for="genreOf">Enter the genre of work</label>
+                    <select name="genre" v-model="work.genre" id="genreOf">
+                        <option value="Social verse">Social verse</option>
+                        <option value="Social verse">Social verse</option>
+                        <option value="Social verse">Social verse</option>
+                    </select>
+              </div>  
+                <!-- <input type="text" > -->
+                <div class="rightSideAdd">
+                    <label for="textAreaText">Enter your work please</label>
+                    <textarea v-model="work.text" id="textAreaText">
+
+                    </textarea>
+                </div>
+                </div>
+                <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
+                <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
+                <div class="butBlock">
+                        <button class="workAdderButton" @click="addWork()">Add work</button>
+                </div>
+                
+ 
+        </div>
+        
     </div>
 </template>
 
@@ -130,5 +150,90 @@
 </script>
 
 <style scoped>
+.fullAddWorkBlock{
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    background-color: #f5f5f5;
+    padding-left: 5%;
 
+}
+
+.fullSide{
+        display: flex;
+    /* flex-direction: row;  */
+    justify-content: space-around;
+     width: 100%;
+     padding-bottom: 3.45%;
+}
+
+.leftSideAdd{
+    display: flex;
+    flex-direction: column;
+}
+
+.leftSideAdd label:hover{
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.leftSideAdd label{
+    margin-top: 12.5%;
+    padding-bottom: 5%;
+}
+
+.leftSideAdd label:first-child{
+    margin-top: 0;
+}
+
+.rightSideAdd{
+        width: 65%;
+}
+
+.rightSideAdd textarea{
+    margin-top: 2%;
+    width: 100%;
+    min-height: 160px;
+    font-size: 1rem;
+    line-height: 1.1rem;
+    font-weight: 500;
+}
+
+textarea,
+input,
+select{
+    background-color: #f2f2f2;
+    padding: 1%;
+}
+
+label{
+    font-size: 0.95rem;
+}
+
+.butBlock{
+   display: flex;
+   justify-content: center;
+}
+
+.workAdderButton{
+    text-align: center;
+    /* margin: 0 auto; */
+    padding: 1.25%;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.2rem;
+    width: 20%;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.workAdderButton:hover{
+    transition: 0.5s;
+    background-color: #000;
+    color: #fff;
+    border-color: #fff;
+}
 </style>
