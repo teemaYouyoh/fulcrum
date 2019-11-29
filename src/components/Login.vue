@@ -20,9 +20,7 @@
                         <i class="fas fa-eye"></i>
                     </div>
 
-                    <div class="textbox" id="textAreaLogin">
-                        <input type="textarea" placeholder="Enter information about yourself">
-                    </div>
+                    
 
                     <input type="button" class="btn" value="Sign in">
                     <p class="signUpLog">Don't have account? <span> Sign up </span></p>
@@ -45,6 +43,10 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password">
                         <i class="fas fa-eye"></i>
+                    </div>
+
+                    <div class="textbox" id="textAreaLogin">
+                        <input type="textarea" placeholder="Enter information about yourself">
                     </div>
 
                     <input type="button" class="btn" value="Sign up">
@@ -99,6 +101,7 @@ LOGIN MENU
 
 .signUpLog span{
     color: brown;
+    cursor: pointer;
 }
 
 
