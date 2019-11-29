@@ -236,4 +236,27 @@ label{
     color: #fff;
     border-color: #fff;
 }
+
+@media screen and (max-width: 650px){
+    .fullSide{
+        display: flex;
+        flex-direction: column;
+        padding-top: 3%;
+        padding-right: 2%;
+    }
+    .leftSideAdd label{
+        margin-top: 4%;
+        padding-bottom: 1%;
+    }
+    .rightSideAdd{
+        padding-top: 4.5%;
+    }
+    .rightSideAdd textarea{
+        width: 150%;
+    }
+    .workAdderButton{
+        width: 40%;
+        margin-top: 3%;
+    }
+}
 </style>

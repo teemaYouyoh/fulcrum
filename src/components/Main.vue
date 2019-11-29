@@ -4,9 +4,10 @@
    
    <div class="content">
        <div class="container">
-           <p class="mainContentP">Наша мета - об’єднати креативних людей</p>
+           <p class="mainContentP">Our goal is to unite
+creative people</p>
            
-           <p class="infoProjContent">Цей проект призначений для вільного розповсюдження текстової інформації (книги, вірші, статті тощо).</p>
+           <p class="infoProjContent">This project is intended for the free distribution of textual information (books, poems, articles and so on).</p>
            
            
             <ul class="portfolio-grid" id="works">
@@ -92,7 +93,7 @@ export default {
     color: #fff;
     text-transform: uppercase;
     line-height: 70px;
-    width: 40%;
+    width: 50%;
     padding-left: 2.5%;
 }
 
@@ -255,6 +256,21 @@ li.grid-item img{
     }
     
 }
+@media screen and (max-width: 600px){
+  .mainContentP{
+    width: 85%;
+    font-size: 38px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .mainContentP{
+     width: 100%;
+     font-size: 33px;
+  }
+ 
+}
+
 .items_wrap{
   max-width: 360px;  
   position: relative;

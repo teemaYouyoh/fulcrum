@@ -10,22 +10,22 @@
                   
                   <div class="fullContentProfile">
                       <div class="leftContentProfile">
-                          <p>Моя сторінка</p>
-                          <p>Моя творчість</p>
-                          <p>Вихід</p>
+                          <p>My homepage</p>
+                          <p>My creation</p>
+                          <p>Sign out</p>
                       </div>
                       
                       <div class="rightContentProfile">
                           <div class="emailContentProfile">
-                              <p class="stand">Моя поштова скринька: <span>{{user.email}}</span></p>
+                              <p class="stand">My mailbox: <span class="infoProf">{{user.email}}</span></p>
                           </div>
                           
                           <div class="telephoneContentProfile">
-                              <p class="stand">Мій номер телефону: <span>+38 066 66 66 666</span></p>
+                              <p class="stand">My telephone number: <span class="infoProf">+38 066 66 66 666</span></p>
                           </div>
                           
                           <div class="birthdayContentProfile">
-                              <p class="stand">День народження: <span>01.01.2000</span></p>
+                              <p class="stand">Birthday: <span class="infoProf">01.01.2000</span></p>
                           </div>
                       </div>
                   </div>
@@ -158,7 +158,7 @@ PROFILE
     padding-bottom: 2.5%;
     font-size: 1.2rem;
     line-height: 2rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     color: #636e72;
     text-transform: uppercase;
@@ -175,11 +175,14 @@ PROFILE
 .birthdayContentProfile{
     display: flex;
     padding-bottom: 2%;
+    width: 100%;
 }
 
 .stand{
-    font-size: 1rem;
+    font-size: 1.2rem;
      color: rgba(10,10,10,0.8);
+     font-weight: 600;
+     width: 100%;
 }
 .emailContentProfile span,
 .telephoneContentProfile span,
@@ -187,5 +190,46 @@ PROFILE
     transform: translateY(2px);
     font-family: 'Arial', sans-serif;
     color: #6c8484;
+    font-size: 1.1rem;
+    padding-left: 1%;
+}
+
+@media screen and (max-width: 800px){
+    .fullContentProfile{
+        display: flex;
+        flex-direction: column;
+    }
+    .leftContentProfile{
+        border: none;
+        width: 100%;
+        /* margin: 0 auto; */
+    }
+    .rightContentProfile{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .profilePhoto{
+        margin: 0 auto;
+    }
+    .topProfileBar{
+        display: block;
+        padding-top: 6%;
+    }
+    .topProfileBar h2{
+        display: flex;
+        justify-content: center;
+        margin-top: 4%;
+        margin-bottom: 1.5%;
+    }
+    .stand{
+        font-size: 1rem;
+    }
+    .emailContentProfile span,
+    .telephoneContentProfile span,
+    .birthdayContentProfile span{
+        font-size: 1rem;
+    }
 }
 </style>

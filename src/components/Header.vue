@@ -122,7 +122,7 @@ export default {
   font-weight: 600;
 }
 .menu a i{
-    font-size: 28px;
+    font-size: 1.65rem;
     font-weight: 500;
 }
 .show-menu-btn,.hide-menu-btn{
@@ -217,5 +217,20 @@ export default {
   .show-menu-btn,.hide-menu-btn{
     display: block;
    }
+   .menu{
+     display: flex;
+     justify-content: space-between;
+   }
+    .linksHeader{
+           margin-top: 5%;
+    }
+
+   .socialHeader{
+     margin-right: 5%;
+          margin-top: 5%;
+   }
+   .menu a{
+     padding: 0 21%;
+   } 
 }
 </style>
