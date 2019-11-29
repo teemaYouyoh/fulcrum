@@ -31,6 +31,8 @@
                   </div>
               </div>
         </div>
+
+        <AddWork />
       
      <Footer/>
    </div>
@@ -45,13 +47,14 @@
 
     import Header from './Header.vue' 
     import Footer from './Footer.vue' 
-
+    import AddWork from './AddWork.vue'
     Vue.use(VueAxios, axios)
 
 export default {
   components : {
     Header,
-    Footer
+    Footer,
+    AddWork
   },
   data(){
       return{
