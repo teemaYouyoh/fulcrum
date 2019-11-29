@@ -63,5 +63,21 @@ var UserSchema = new Schema({
   }
 });
 
+var TypesOfWorksSchema = new Schema({
+  verses: {
+    type: Array,
+    required: 'Kindly enter the verse'
+  },
+  books: {
+    type: Array,
+    required: 'Kindly enter the book'
+  },
+  articles: {
+    type: Array,
+    required: 'Kindly enter the article'
+  },
+});
+
 module.exports = mongoose.model('Works', WorkSchema);
 module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('TypesOfWorks', TypesOfWorksSchema);

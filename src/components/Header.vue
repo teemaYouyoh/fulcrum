@@ -30,7 +30,7 @@
         </div>
       </div>
       
-    <div class="subHeader" v-if="isActiveSubHeader==true">
+    <div class="subHeader" v-if="isActiveSubHeader=='true'">
       <div class="container">
                   <p>Filter like you want:</p>
         <div class="navSubHeader">
@@ -62,15 +62,15 @@
 export default {
   data(){
     return{
-      isActiveSubHeader: false
+      isActiveSubHeader: 'true'
     }
   },
   methods:{
     isActiveSubHeaderFunction(){
-      if(this.isActiveSubHeader==true)
-      this.isActiveSubHeader = false;
-      else if(this.isActiveSubHeader==false)
-      this.isActiveSubHeader = true;
+      if(this.isActiveSubHeader=='true')
+      this.isActiveSubHeader = 'false';
+      else if(this.isActiveSubHeader=='false')
+      this.isActiveSubHeader = 'true';
       return this.isActiveSubHeader;
     }
   }

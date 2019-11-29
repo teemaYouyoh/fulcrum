@@ -2,7 +2,8 @@
 
 var mongoose = require('mongoose'),
   Work = mongoose.model('Works'),
-  User = mongoose.model('Users');
+  User = mongoose.model('Users'),
+  TypeOfWorks = mongoose.model('TypesOfWorks');
 
 exports.list_all_works = function(req, res) {
   Work.find({}, function(err, work) {
@@ -91,5 +92,50 @@ exports.delete_a_user = function(req, res) {
     if (err)
       res.send(err);
     res.json({ message: 'User successfully deleted' });
+  });
+};
+
+exports.list_all_types = function(req, res) {
+  TypeOfWorks.find({}, function(err, type) {
+    if (err)
+      res.send(err);
+    res.json(type);
+  });
+};
+
+exports.create_a_types = function(req, res) {
+  var new_type = new TypeOfWorks(req.body);
+  new_type.save(function(err, type) {
+    if (err)
+      res.send(err);
+    res.json(type);
+  });
+};
+
+exports.read_a_type = function(req, res) {
+  TypeOfWorks.findById(req.params.typeId, function(err, type) {
+    if (err)
+      res.send(err);
+    res.json(type);
+  });
+};
+
+exports.update_a_type = function(req, res) {
+  TypeOfWorks.findOneAndUpdate({_id: req.params.typeId}, req.body, {new: true}, function(err, type) {
+    if (err)
+      res.send(err);
+    res.json(type);
+  });
+};
+
+exports.delete_a_type = function(req, res) {
+
+
+  TypeOfWorks.remove({
+    _id: req.params.typeId
+  }, function(err, TypeOfWorks) {
+    if (err)
+      res.send(err);
+    res.json({ message: 'TypeOfWorks successfully deleted' });
   });
 };
