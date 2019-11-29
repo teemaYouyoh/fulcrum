@@ -40,15 +40,13 @@
           <div class="subHeaderSort">Sort</div> -->
 
           <div class="categorySub">
-            <select name="" id="">
-              <option value="verse">Verse</option>
-              <option value="books">Books</option>
-              <option value="article">Article</option>
+            <select name="typeOfWork" v-model="typeOfWork"> 
+              <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
             </select>
           </div>
           <div class="kindSub">
-            <select name="" id="">
-              <option value="">Мустаж</option>
+            <select name="genreOfWork" v-model="genreOfWork">
+              <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
             </select>
           </div>
 
@@ -59,11 +57,27 @@
 </template>
 
 <script>
+
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios)
+
 export default {
   data(){
     return{
-      isActiveSubHeader: 'true'
+      isActiveSubHeader: 'true',
+      typesOfWorks : {},
+      typeOfWork : '',
+      genreOfWork : '',
     }
+  },
+  mounted(){
+    Vue.axios.get('http://localhost:3000/typesOfWorks').then(response => {
+            console.log(response.data[0]);
+            this.typesOfWorks = response.data[0];
+        });
   },
   methods:{
     isActiveSubHeaderFunction(){
@@ -73,7 +87,25 @@ export default {
       this.isActiveSubHeader = 'true';
       return this.isActiveSubHeader;
     }
-  }
+  },
+  computed : {
+    
+     listTypesOfWorks(){
+       let types = [];
+       for(let key in this.typesOfWorks){
+          if(key != '_id' && key != '__v'){
+            types.push(key);
+          }
+       }
+       if(types !== undefined) this.typeOfWork = types[0];
+       return types;
+     },
+     listGenreOfWorks(){
+       let genre = this.typesOfWorks[this.typeOfWork];
+       if(genre !== undefined) this.genreOfWork = genre[0];
+       return genre;
+     }
+   }
 }
 </script>
 

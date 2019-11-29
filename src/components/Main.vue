@@ -33,8 +33,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import VueTypedJs from 'vue-typed-js';
-import Typed from 'typed.js';
+// import VueTypedJs from 'vue-typed-js';
+// import Typed from 'typed.js';
 
 import Header from './Header.vue' 
 import Footer from './Footer.vue' 
@@ -42,25 +42,23 @@ import Footer from './Footer.vue'
 Vue.use(VueAxios, axios)
 
 export default {
+  props : ['typeOfWork'],
   components : {
       Header,
       Footer
 	},
     data(){
         return{
-            works : [],
-            typesOfWorks : {}
+            works : []
         }
     },
     mounted(){
         Vue.axios.get('http://localhost:3000/works').then(response => {
             console.log(response.data);
             this.works = response.data;
-        })
-        Vue.axios.get('http://localhost:3000/typesOfWorks').then(response => {
-            console.log(response.data);
-            this.typesOfWorks = response.data[0];
-        })
+            alert(this.$props.typeOfWork);
+        });
+        
     },
     methods : {
         diff: function(arr1, arr2) {
@@ -87,6 +85,7 @@ export default {
           }
         }
     },
+   
 }
 
 </script>
