@@ -58,17 +58,22 @@
         data(){
             return{
                 showModal: false,
+                currentUser : {},
                 work : {
-                    name : '123',
-                    section : '123',
-                    genre : '123',
-                    autor : '123',
-                    text : '123',
-                    image : '123',
-                    authorId : '5ddfd97f993b541d2078aeab',
-                    date : '123'
+                    name : 'Страна Низких',
+                    section : 'Verses',
+                    genre : 'Heart-to-heart',
+                    author : '',
+                    text : '<p>Расскаты грома по небу ночному,</p>\n<p>Слышны были и немому и глухому,</p>\n<p>А слепой безногий дед,</p>\n<p>Бежал за ними в след,</p>\n<p>Но впереди лишь тени были,</p>\n<p>Что били хозяев своих,</p>\n<p>Там мышка кошку гнала в нору,</p>\n<p>А тип со странной формой,</p>\n<p>Стоял погруженный в кому,</p>\n<p>Без мыслей о высоком,</p>\n<p>Ему б платили, он стоял,</p>\n<p>Перестали, он б стрелял,</p>\n<p>Ещё дальше, где-то в переулке,</p>\n<p>Стояла пара человек, возле дурки,</p>\n<p>Их послали в след за теми,</p>\n<p>Кто назвал планету шаром,</p>\n<p>Кто сказал что бога нет,</p>\n<p>И тут же Божа Кара,</p>\n<p>Снезошла на них,</p>\n<p>Карма.. Может...</p>\n<p>Но скорее просто кожа,</p>\n<p>Черная была...</p>\n<p>Кто быстрее прыгнет,</p>\n<p>Того и тапки,</p>\n<p>Кто заплатит больше,</p>\n<p>Тот и раньше встанет,</p>\n<p>Часов в 3 утра,</p>\n<p>С другом водкой,</p>\n<p>Пошел управлять подводной лодкой,</p>\n<p>Он взорвал Америку, всю Гейропу,</p>\n<p>Стал героем...</p>\n<p>Получил два жетона на метро,</p>\n<p>Один домой, второй на свалку...</p>',
+                    image : '/src/img/covers/poem3.jpg',
+                    authorId : '',
+                    date : ''
                 }
             }
+        },
+        mounted(){
+            this.currentUser = this.$store.getters.getCurrentUser;
+
         },
         methods : {
             addWork(){
@@ -77,26 +82,12 @@
                 let curr_month = d.getMonth() + 1;
                 let curr_year = d.getFullYear();
                 this.work.date = curr_year + "-" + curr_month + "-" + curr_date;
+                this.work.author = this.currentUser.name;
+                this.work.authorId = this.currentUser._id;
                 Vue.axios.post("http://localhost:3000/works", JSON.parse(JSON.stringify(this.work))).then(response => {
                     console.log(response.data);
                 })
             },
-            onClick() {
-              axios({
-                    url: 'http://localhost:3000/works',
-                    method: 'GET',
-                    responseType: 'blob',
-                }).then((response) => {
-                     var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-                     var fileLink = document.createElement('a');
-   
-                     fileLink.href = fileURL;
-                     fileLink.setAttribute('download', 'file.pdf');
-                     document.body.appendChild(fileLink);
-   
-                     fileLink.click();
-                });
-          }
         }
     }
 //     import $ from "jquery";

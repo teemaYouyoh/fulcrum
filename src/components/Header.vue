@@ -10,10 +10,11 @@
 
         <ul class="menu">
           <div class="linksHeader">
-              <a href="#"><i class="fas fa-search" @click="isActiveSubHeaderFunction()"></i></a>
-              <router-link :to="'/login'"><i class="fas fa-user"></i></router-link>
-              <a href="#"><i class="fas fa-plus"></i></a>
-              <router-link :to="'/'"><i class="fas fa-home"></i></router-link>
+              <router-link :to="'/login'" v-if="currentUser === null"><i class="fas fa-user"></i></router-link>
+              <router-link :to="'/logout'" v-else-if="currentUser !== null"><i class="fas fa-user"></i></router-link>
+              <router-link :to="'/login'" v-if="currentUser === null"><i class="fas fa-plus"></i></router-link>
+              <router-link :to="'/add-work'" v-else-if="currentUser !== null"><i class="fas fa-plus"></i></router-link>
+                <router-link :to="'/'"><i class="fas fa-home"></i></router-link>
           </div>
 
           <div class="socialHeader">
@@ -30,29 +31,6 @@
         </div>
       </div>
       
-    <div class="subHeader" v-if="isActiveSubHeader=='true'">
-      <div class="container">
-                  <p>Filter like you want:</p>
-        <div class="navSubHeader">
-          <!-- <div class="subHeaderCategory">Category</div>
-          <div class="subHeaderKind">Kind</div>
-          <div class="subHeaderAuthor">Author</div>
-          <div class="subHeaderSort">Sort</div> -->
-
-          <div class="categorySub">
-            <select name="typeOfWork" v-model="typeOfWork"> 
-              <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
-            </select>
-          </div>
-          <div class="kindSub">
-            <select name="genreOfWork" v-model="genreOfWork">
-              <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-    </div>
     </div>
 </template>
 
@@ -67,44 +45,17 @@ Vue.use(VueAxios, axios)
 export default {
   data(){
     return{
-      isActiveSubHeader: 'true',
-      typesOfWorks : {},
-      typeOfWork : '',
-      genreOfWork : '',
+      currentUser : null,
     }
   },
   mounted(){
-    Vue.axios.get('http://localhost:3000/typesOfWorks').then(response => {
-            console.log(response.data[0]);
-            this.typesOfWorks = response.data[0];
-        });
+    this.currentUser = this.$store.getters.getCurrentUser;
   },
   methods:{
-    isActiveSubHeaderFunction(){
-      if(this.isActiveSubHeader=='true')
-      this.isActiveSubHeader = 'false';
-      else if(this.isActiveSubHeader=='false')
-      this.isActiveSubHeader = 'true';
-      return this.isActiveSubHeader;
-    }
+   
   },
   computed : {
     
-     listTypesOfWorks(){
-       let types = [];
-       for(let key in this.typesOfWorks){
-          if(key != '_id' && key != '__v'){
-            types.push(key);
-          }
-       }
-       if(types !== undefined) this.typeOfWork = types[0];
-       return types;
-     },
-     listGenreOfWorks(){
-       let genre = this.typesOfWorks[this.typeOfWork];
-       if(genre !== undefined) this.genreOfWork = genre[0];
-       return genre;
-     }
    }
 }
 </script>
@@ -148,8 +99,8 @@ export default {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0 30%;
-  transition: 0.4s;
+  padding: 0 30px;
+  transition: 0.4s color;
   font-size: 28px;
   font-weight: 600;
 }
@@ -254,15 +205,15 @@ export default {
      justify-content: space-between;
    }
     .linksHeader{
-           margin-top: 5%;
+      margin-top: 5%;
     }
 
    .socialHeader{
      margin-right: 5%;
-          margin-top: 5%;
+      margin-top: 5%;
    }
    .menu a{
-     padding: 0 21%;
+     padding: 0 21px;
    } 
 }
 </style>

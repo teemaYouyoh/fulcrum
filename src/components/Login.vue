@@ -11,18 +11,16 @@
                     <h1>Login</h1>
                     <div class="textbox">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" v-model='userLogin'>
                     </div>
 
                     <div class="textbox">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Password" v-model='userPassword'>
                         <i class="fas fa-eye"></i>
                     </div>
 
-                    
-
-                    <input type="button" class="btn" value="Sign in">
+                    <input type="button" class="btn" value="Sign in" @click="signIn()">
                     <p class="signUpLog">Don't have account? <span> Sign up </span></p>
                 </div>
                 
@@ -56,16 +54,18 @@
         <!--Portfolio grid-->
 
         </div>
-
-
-
-
-            <Footer/>
+    
+     <Footer/>
     
     </div>
 </template>
 
 <script>
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios)
 
 import Header from './Header.vue' 
 import Footer from './Footer.vue' 
@@ -73,6 +73,33 @@ export default {
     components : {
         Header,
         Footer
+    },
+    data(){
+        return{
+            users : [],
+            userLogin : '',
+            userPassword : ''
+        }
+    },
+    mounted(){
+        Vue.axios("http://localhost:3000/users").then(response=>{
+            console.log(response.data);
+            this.users = response.data;
+        })
+
+    },
+    methods : {
+        signIn(){
+
+            console.log(this.$router.app._route.fullPath);
+
+            this.users.forEach(element => {
+                if((element.name == this.userLogin || element.email == this.userLogin) && element.password == this.userPassword){
+                    this.$store.commit('setCurrentUser', element);
+                    this.$router.push('/profile/' + element._id);
+                }
+            });
+        }
     }
     
 }

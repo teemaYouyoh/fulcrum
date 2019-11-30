@@ -1,18 +1,45 @@
 <template>
     <div>
-  <Header/>
-   
+  <Header />
+
+    <div class="subHeader" v-if="isActiveSubHeader=='true'">
+      <div class="container">
+                  <p>Filter like you want:</p>
+        <div class="navSubHeader">
+          <!-- <div class="subHeaderCategory">Category</div>
+          <div class="subHeaderKind">Kind</div>
+          <div class="subHeaderAuthor">Author</div>
+          <div class="subHeaderSort">Sort</div> -->
+
+          <div class="categorySub">
+            <select name="typeOfWork" v-model="typeOfWork"> 
+              <option value="All" selected>All types</option>
+              <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
+            </select>
+          </div>
+          <div class="kindSub">
+            <select name="genreOfWork" v-model="genreOfWork">
+              <option value="All" selected>All genres</option>
+              <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
    <div class="content">
+
        <div class="container">
            <p class="mainContentP">Our goal is to unite
 creative people</p>
            
-           <p class="infoProjContent">This project is intended for the free distribution of textual information (books, poems, articles and so on).</p>
-           
-           
+            <p class="infoProjContent">
+              <span>This project is intended for the free distribution of textual information (books, poems, articles and so on).</span>
+              <i class="fas fa-search" @click="isActiveSubHeaderFunction()"></i>
+            </p>
             <ul class="portfolio-grid" id="works">
 
-                <li v-for="work in works" class="grid-item" v-bind:key="work._id">
+                <li v-for="work in listOfWorks" class="grid-item" v-bind:key="work._id">
                    <div class="items_wrap">
                           <img :src="work.image">
                           <div class="grid-hover">
@@ -34,32 +61,37 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios)
 // import VueTypedJs from 'vue-typed-js';
 // import Typed from 'typed.js';
 
 import Header from './Header.vue' 
 import Footer from './Footer.vue' 
 
-Vue.use(VueAxios, axios)
 
 export default {
-  props : ['typeOfWork'],
   components : {
       Header,
       Footer
 	},
     data(){
         return{
-            works : []
+            works : [],
+            typesOfWorks : {},
+            typeOfWork : 'All',
+            genreOfWork : 'All',
+            isActiveSubHeader: 'false',
         }
     },
     mounted(){
         Vue.axios.get('http://localhost:3000/works').then(response => {
             console.log(response.data);
             this.works = response.data;
-            alert(this.$props.typeOfWork);
         });
-        
+        Vue.axios.get('http://localhost:3000/typesOfWorks').then(response => {
+            console.log(response.data[0]);
+            this.typesOfWorks = response.data[0];
+        });        
     },
     methods : {
         diff: function(arr1, arr2) {
@@ -84,8 +116,43 @@ export default {
             };
 
           }
-        }
+        },
+        isActiveSubHeaderFunction(){
+          if(this.isActiveSubHeader=='true')
+          this.isActiveSubHeader = 'false';
+          else if(this.isActiveSubHeader=='false')
+          this.isActiveSubHeader = 'true';
+          return this.isActiveSubHeader;
+        },
     },
+    computed : {
+      listOfWorks(){
+        return this.works.filter(item => {
+          if(this.typeOfWork == 'All') return true;
+          else if(item.section.toLowerCase() == this.typeOfWork.toLowerCase() 
+                  && (item.genre.toLowerCase() == this.genreOfWork.toLowerCase() 
+                  || this.genreOfWork == "All")) return true;
+        })
+      },
+      listTypesOfWorks(){
+        let types = [];
+        for(let key in this.typesOfWorks){
+           if(key != '_id' && key != '__v'){
+             types.push(key);
+           }
+        }
+        return types;
+      },
+      listGenreOfWorks(){
+        if(this.typeOfWork == 'All') this.genreOfWork = 'All'; 
+        else {
+          var genre = this.typesOfWorks[this.typeOfWork];
+          // if(genre[0] !== undefined) this.genreOfWork = genre[0];
+         }
+        return genre;
+      }
+    }
+    
    
 }
 
@@ -93,26 +160,89 @@ export default {
 
 <style scoped>
 
+/* SUBHEADER */
+
+.subHeader{
+  background: #2b2b2b;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+}
+
+.subHeader p{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.categorySub select,
+.kindSub select{
+  background-color: transparent;
+  color: #fff;
+  width: 200px;
+  /* min-height: 35px; */
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 25px;
+  padding: 7%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.categorySub option,
+.kindSub option{
+  height: 20px;
+  font-size: 1rem;
+}
+
+.categorySub{
+  margin-right: 5%;
+}
+
+.navSubHeader{
+  padding-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subHeaderCategory,
+.subHeaderKind,
+.subHeaderAuthor,
+.subHeaderSort{
+  background-color: #f2f2f2;
+  color: #2b2b2b;
+  font-size: 1.7rem;
+  border-radius: 5%;
+  text-align: center;
+  padding: 0.5% 2% 0.5% 2%;
+  color:#2b2b2b;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 3.5%;
+}
+
 /* CONTENT */
 
 .content{
     position: relative;
     padding-bottom: 3%;
-    background: #2b2b2b;
+    /* background: #2b2b2b; */
 }
 
 .mainContentP{
     padding-top: 5%;
     font-size: 43px;
     font-weight: 900;
-    color: #fff;
+    /* color: #fff; */
     text-transform: uppercase;
     line-height: 70px;
     width: 50%;
     padding-left: 2.5%;
 }
 
-.infoProjContent{
+/* .infoProjContent{
   font-size:13px;
   color:#797979;
   margin-top:20px;
@@ -121,6 +251,31 @@ export default {
   letter-spacing:1px;
   width:100%;
   padding-left: 2.5%;
+} */
+.infoProjContent{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size:13px;
+  color:#797979;
+  margin-top:20px;
+  font-weight:400;
+  line-height:22px;
+  letter-spacing:1px;
+  width:100%;
+  padding-left: 2.5%;
+}
+
+.infoProjContent i{
+  margin-left : auto;
+  margin-right: 10px;
+  font-size : 26px;
+  cursor : pointer;
+  transition : 0.5s;
+}
+
+.infoProjContent i:hover{
+  color: black;
 }
 
 /*
