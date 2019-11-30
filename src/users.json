@@ -1,1 +1,2 @@
-{"_id":{"$oid":"5dde9b4d94969d326cf81049"},"email":"example@mail.com","name":"John","password":"1234","about_u":"I'm John Doe","avatar":"img"}
+{"_id":{"$oid":"5dde9b4d94969d326cf81049"},"email":"example@mail.com","password":"1234","about_u":{"phone":"+38 066 66 66 666","birthday":"01.01.2000","name":"Vitaliy Kotkin"},"avatar":"../uploads/image/5dde9b4d94969d326cf81049.jpg"}
+{"_id":{"$oid":"5de29cd5f98b0e361058a394"},"email":"example@gmail.com","password":"1234","about_u":{"phone":"+38 077 77 77 777","birthday":"01.02.2001","name":"Veronika Omelchuk"},"avatar":"/src/img/face.png"}
