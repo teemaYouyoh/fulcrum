@@ -34,6 +34,8 @@ routes(app); //register the route
 // var routes1 = require('./api/routes/fulcrumRoutes1'); //importing route1
 // routes1(app);
 
+
+
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });

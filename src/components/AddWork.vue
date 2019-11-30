@@ -7,15 +7,11 @@
                     <input type="text" v-model="work.name" id="nameOfWork">
                     <label for="typePoem">Enter the type of work</label>
                     <select name="section" v-model="work.section" id="typePoem">
-                        <option value="Poem">Poem</option>
-                        <option value="Poem">Poem</option>
-                        <option value="Poem">Poem</option>
+                        <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
                     </select>
                     <label for="genreOf">Enter the genre of work</label>
                     <select name="genre" v-model="work.genre" id="genreOf">
-                        <option value="Social verse">Social verse</option>
-                        <option value="Social verse">Social verse</option>
-                        <option value="Social verse">Social verse</option>
+                         <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
                     </select>
               </div>  
                 <!-- <input type="text" > -->
@@ -58,6 +54,9 @@
         data(){
             return{
                 showModal: false,
+                typesOfWorks : {},
+                typeOfWork : '',
+                genreOfWork : '',
                 currentUser : {},
                 work : {
                     name : 'Страна Низких',
@@ -73,7 +72,10 @@
         },
         mounted(){
             this.currentUser = this.$store.getters.getCurrentUser;
-
+            Vue.axios.get('http://localhost:3000/typesOfWorks').then(response => {
+                console.log(response.data[0]);
+                this.typesOfWorks = response.data[0];
+            });   
         },
         methods : {
             addWork(){
@@ -82,62 +84,37 @@
                 let curr_month = d.getMonth() + 1;
                 let curr_year = d.getFullYear();
                 this.work.date = curr_year + "-" + curr_month + "-" + curr_date;
-                this.work.author = this.currentUser.name;
+                this.work.author = this.currentUser.about_u.name;
                 this.work.authorId = this.currentUser._id;
                 Vue.axios.post("http://localhost:3000/works", JSON.parse(JSON.stringify(this.work))).then(response => {
                     console.log(response.data);
                 })
             },
+        },
+        computed : {
+            listTypesOfWorks(){
+                var types = [];
+                for(let key in this.typesOfWorks){
+                    if(key != '_id' && key != '__v'){
+                        types.push(key);
+                    }
+                }
+                if(types[0] !== undefined){
+                    this.work.section = types[0];
+                } 
+                return types;
+            },
+            listGenreOfWorks(){
+                var genre = [];
+
+                if(this.typesOfWorks[this.work.section] !== undefined)
+                    genre = this.typesOfWorks[this.work.section];
+                    this.work.genre = genre[0];
+
+                return genre;
+            }
         }
     }
-//     import $ from "jquery";
-// var dropZone = $('#upload-container');
-// dropZone.on('drag dragstart dragend dragover dragenter dragleave drop', function(){
-//      return false;
-// });
-// dropZone.on('dragover dragenter', function() {
-//      dropZone.addClass('dragover');
-// });
-
-// dropZone.on('dragleave', function(e) {
-//      dropZone.removeClass('dragover');
-// });
-// dropZone.on('dragleave', function(e) {
-//      let dx = e.pageX - dropZone.offset().left;
-//      let dy = e.pageY - dropZone.offset().top;
-//      if ((dx < 0) || (dx > dropZone.width()) || (dy < 0) || (dy > dropZone.height())) {
-//           dropZone.removeClass('dragover');
-//      };
-// });
-//     $('#file-input').change(function() {
-//         let files = this.files;
-//         sendFiles(files);
-//     });
-
-// dropZone.on('drop', function(e) {
-//      dropZone.removeClass('dragover');
-//      let files = e.originalEvent.dataTransfer.files;
-//      sendFiles(files);
-// });
-//     function sendFiles(files) {
-//      let maxFileSize = 5242880;
-//      let Data = new FormData();
-//      $(files).each(function(index, file) {
-//           if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
-//                Data.append('images[]', file);
-//           }
-//      });
-// };
-// $.ajax({
-//      url: dropZone.attr('action'),
-//      type: dropZone.attr('method'),
-//      data: Data,
-//      contentType: false,
-//      processData: false,
-//      success: function(data) {
-//           alert('Файлы были успешно загружены');
-//      }
-// });
 </script>
 
 <style scoped>
@@ -145,7 +122,6 @@
     padding-top: 2.5%;
     padding-bottom: 2.5%;
     background-color: #f5f5f5;
-    padding-left: 5%;
 
 }
 

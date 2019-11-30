@@ -42,16 +42,12 @@ var UserSchema = new Schema({
     type: String,
     required: 'Kindly enter the email'
   },
-  name: {
-    type: String,
-    required: 'Kindly enter the name'
-  },
   password: {
     type: String,
     required: 'Kindly enter the password'
   },
   about_u: {
-    type: String
+    type: Object
   },
   regist_date: {
     type: String,

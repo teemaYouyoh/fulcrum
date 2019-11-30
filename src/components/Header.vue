@@ -10,11 +10,12 @@
 
         <ul class="menu">
           <div class="linksHeader">
-              <router-link :to="'/login'" v-if="currentUser === null"><i class="fas fa-user"></i></router-link>
-              <router-link :to="'/logout'" v-else-if="currentUser !== null"><i class="fas fa-user"></i></router-link>
+              <router-link :to="'/'"><i class="fas fa-home"></i></router-link>
               <router-link :to="'/login'" v-if="currentUser === null"><i class="fas fa-plus"></i></router-link>
               <router-link :to="'/add-work'" v-else-if="currentUser !== null"><i class="fas fa-plus"></i></router-link>
-                <router-link :to="'/'"><i class="fas fa-home"></i></router-link>
+              <router-link :to="'/login'" v-if="currentUser === null"><i class="fas fa-user"></i></router-link>
+              <router-link :to="'/logout'" v-else-if="currentUser !== null"><i class="fas fa-sign-out"></i></router-link>
+              <router-link class="currentUserName" :to="'/profile/' + currentUser._id" v-if="currentUser !== null">{{currentUser.about_u.name}}</router-link>
           </div>
 
           <div class="socialHeader">
@@ -107,6 +108,10 @@ export default {
 .menu a i{
     font-size: 1.65rem;
     font-weight: 500;
+}
+.menu .currentUserName{
+  font-size : 16px;
+  padding : 0;
 }
 .show-menu-btn,.hide-menu-btn{
   transition: 0.4s;

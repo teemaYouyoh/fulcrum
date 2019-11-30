@@ -4,9 +4,12 @@
         <div class="profile" id="ajax-content">
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
-                      <div class="profilePhoto"></div>
-                      <h2>{{user.name}}</h2>
+                      <img class="profilePhoto" :src="user.avatar"></img>
+                      <h2>{{user.about_u.name}}</h2>
                   </div>
+
+                    <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+                    <button v-on:click="submitFile()">Submit</button>
                   
                   <div class="fullContentProfile">
                       <div class="leftContentProfile">
@@ -21,18 +24,17 @@
                           </div>
                           
                           <div class="telephoneContentProfile">
-                              <p class="stand">My telephone number: <span class="infoProf">+38 066 66 66 666</span></p>
+                              <p class="stand">My telephone number: <span class="infoProf">{{user.about_u.phone}}</span></p>
                           </div>
                           
                           <div class="birthdayContentProfile">
-                              <p class="stand">Birthday: <span class="infoProf">01.01.2000</span></p>
+                              <p class="stand">Birthday: <span class="infoProf">{{user.about_u.birthday}}</span></p>
                           </div>
                       </div>
                   </div>
               </div>
         </div>
-
-        <AddWork />
+        <AddWork v-if="isAddWork == 'true'" />
       
      <Footer/>
    </div>
@@ -58,14 +60,51 @@ export default {
   },
   data(){
       return{
-          user : {}
+          user : {
+              about_u : {
+                  name : '',
+                  phone : '',
+                  birthday : '',
+              }
+          },
+          isAddWork : 'false'
       }
   },
-  mounted(){
+  mounted(){      
       Vue.axios.get('http://localhost:3000/users/'+this.$route.params.id).then(response => {
           console.log(response.data);
           this.user = response.data;
-      })
+          
+
+          let currentUser = this.$store.getters.getCurrentUser;
+          if(currentUser !== null && currentUser._id == this.user._id)
+            this.isAddWork = 'true';
+      });
+  },
+  methods : {
+    async submitFile() {
+         let formData = new FormData();
+         formData.append('file', this.file);
+         formData.append('student_id', this.user._id);
+         await Vue.axios.post('http://localhost:3000/uploadphoto', formData, { headers: {
+                 'Content-Type': 'multipart/form-data'
+                 }
+             }).then(function () {
+                  console.log('SUCCESS!!');
+             })
+             .catch(function () {
+             console.log('FAILURE!!');
+             });
+           this.user.avatar = '../uploads/image/' + this.user._id + '.jpg';
+            Vue.axios.put('http://localhost:3000/users/'+this.user._id, JSON.parse(JSON.stringify(this.user))).then(response=>{
+                console.log(response.data);
+            });
+         },
+    handleFileUpload() {
+        this.file = this.$refs.file.files[0];
+    }
+
+
   }
 }
 </script>
@@ -83,7 +122,7 @@ PROFILE
 }
 
 .topProfileBar{
-    background: url(/src/img/profile.jpeg)center no-repeat;
+    background: url(/src/img/profile.jpeg) center no-repeat;
     -webkit-background-size: cover;
     background-size: cover;
     display: flex;

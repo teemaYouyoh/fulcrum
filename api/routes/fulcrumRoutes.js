@@ -1,4 +1,9 @@
 'use strict';
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+var fs = require('fs');
+var path = require('path');
+var filepreview = require('filepreview-es6');
 module.exports = function(app) {
   var fulcrum = require('../controllers/fulcrumController');
 
@@ -29,4 +34,24 @@ module.exports = function(app) {
     .get(fulcrum.read_a_type)
     .put(fulcrum.update_a_type)
     .delete(fulcrum.delete_a_type);
+  
+    app.route('/uploadphoto').post(
+      upload.single("file"),
+      (req, res) => {
+        const tempPath = req.file.path;
+        const targetPath = path.join(__dirname,"../../uploads/image/" + req.body.student_id + path.extname(req.file.originalname));
+        fs.rename(tempPath, targetPath, err => {
+          if (!filepreview.generateSync(targetPath, path.join(__dirname, "../../uploads/preview/" + req.body.student_id + '.jpg'))) {
+            console.log('Oops, something went wrong.');
+          } else {
+            console.log('File preview done!');
+          };
+          res
+            .status(200)
+            .contentType("text/plain")
+            .end("File uploaded!");
+        });
+      }
+    );
+
 };

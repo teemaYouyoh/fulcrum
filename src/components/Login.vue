@@ -94,7 +94,7 @@ export default {
             console.log(this.$router.app._route.fullPath);
 
             this.users.forEach(element => {
-                if((element.name == this.userLogin || element.email == this.userLogin) && element.password == this.userPassword){
+                if(element.email == this.userLogin && element.password == this.userPassword){
                     this.$store.commit('setCurrentUser', element);
                     this.$router.push('/profile/' + element._id);
                 }

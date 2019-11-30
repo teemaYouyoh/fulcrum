@@ -11,6 +11,7 @@ import Logout from './components/Logout.vue'
 import Profile from './components/Profile.vue'
 import OnePage from './components/OnePage.vue'
 import AddWork from './components/AddWork.vue'
+import Loadimg from './components/loadimg.vue'
 
 import store from "./store.js";
 
@@ -22,7 +23,8 @@ const routes = [
     { path : '/logout', component : Logout},
     { path : '/profile/:id', component : Profile},
     { path : '/single-page/:id', component: OnePage},
-    { path : '/add-work', component: AddWork}
+    { path : '/add-work', component: AddWork},
+    { path : '/loadimg', component: Loadimg}
 ]
 
 const router = new VueRouter({

@@ -2,7 +2,7 @@
     <div>
   <Header />
 
-    <div class="subHeader" v-if="isActiveSubHeader=='true'">
+    <div class="subHeader">
       <div class="container">
                   <p>Filter like you want:</p>
         <div class="navSubHeader">
@@ -57,6 +57,7 @@ creative people</p>
 </template>
 
 <script>
+
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
@@ -67,6 +68,8 @@ Vue.use(VueAxios, axios)
 
 import Header from './Header.vue' 
 import Footer from './Footer.vue' 
+
+var $ = require('jquery');
 
 
 export default {
@@ -118,11 +121,21 @@ export default {
           }
         },
         isActiveSubHeaderFunction(){
-          if(this.isActiveSubHeader=='true')
-          this.isActiveSubHeader = 'false';
-          else if(this.isActiveSubHeader=='false')
-          this.isActiveSubHeader = 'true';
-          return this.isActiveSubHeader;
+          $(".subHeader>.container").animate({
+              height: 'toggle'
+          }, "slow");
+          if(this.isActiveSubHeader == 'true'){
+            $(".subHeader").animate({
+              padding: '0'
+            }, "slow");
+            this.isActiveSubHeader = 'false'
+          }
+          else if(this.isActiveSubHeader == 'false'){
+            $(".subHeader").animate({
+              padding: '30px 0'
+            }, "slow");
+            this.isActiveSubHeader = 'true'
+          }
         },
     },
     computed : {
@@ -151,11 +164,10 @@ export default {
          }
         return genre;
       }
-    }
+    },
     
    
 }
-
 </script>
 
 <style scoped>
@@ -164,8 +176,10 @@ export default {
 
 .subHeader{
   background: #2b2b2b;
-  padding-top: 2.5%;
-  padding-bottom: 2.5%;
+}
+
+.subHeader .container{
+  display : none;
 }
 
 .subHeader p{
