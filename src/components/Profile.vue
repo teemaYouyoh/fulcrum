@@ -4,12 +4,18 @@
         <div class="profile" id="ajax-content">
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
-                      <img class="profilePhoto" :src="user.avatar"></img>
+                      <img class="profilePhoto" :src="user.avatar">
                       <h2>{{user.about_u.name}}</h2>
                   </div>
-
-                    <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-                    <button v-on:click="submitFile()">Submit</button>
+                    <div class="editProfile" v-if="isCurrentUser == 'true'">
+                        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+                        <button v-on:click="submitFile()">Submit</button>
+                        <input type="text" placeholder="name" v-model="editUser.name">
+                        <input type="text" placeholder="phone" v-model="editUser.phone">
+                        <input type="text" placeholder="birthday" v-model="editUser.birthday">
+                        <input type="password" placeholder="password" v-model="editUser.password">
+                    </div>
+                    
                   
                   <div class="fullContentProfile">
                       <div class="leftContentProfile">
@@ -34,7 +40,7 @@
                   </div>
               </div>
         </div>
-        <AddWork v-if="isAddWork == 'true'" />
+        <AddWork v-if="isCurrentUser == 'true'" />
       
      <Footer/>
    </div>
@@ -60,6 +66,12 @@ export default {
   },
   data(){
       return{
+          editUser : {
+              name : '',
+              phone : '',
+              birthday : '',
+              password : '',
+          },
           user : {
               about_u : {
                   name : '',
@@ -67,7 +79,7 @@ export default {
                   birthday : '',
               }
           },
-          isAddWork : 'false'
+          isCurrentUser : 'false'
       }
   },
   mounted(){      
@@ -78,7 +90,7 @@ export default {
 
           let currentUser = this.$store.getters.getCurrentUser;
           if(currentUser !== null && currentUser._id == this.user._id)
-            this.isAddWork = 'true';
+            this.isCurrentUser = 'true';
       });
   },
   methods : {
@@ -95,14 +107,19 @@ export default {
              .catch(function () {
              console.log('FAILURE!!');
              });
-           this.user.avatar = '../uploads/image/' + this.user._id + '.jpg';
+            this.user.about_u.name = this.editUser.name;
+            this.user.about_u.phone = this.editUser.phone;
+            this.user.about_u.birthday = this.editUser.birthday;
+            this.user.password = this.editUser.password;
             Vue.axios.put('http://localhost:3000/users/'+this.user._id, JSON.parse(JSON.stringify(this.user))).then(response=>{
                 console.log(response.data);
             });
          },
     handleFileUpload() {
         this.file = this.$refs.file.files[0];
-    }
+        this.user.avatar = '../uploads/image/' + this.user._id + '.jpg';
+
+    },
 
 
   }
@@ -116,10 +133,6 @@ export default {
 PROFILE
 ******************************
 */
-
-.profile{
-    
-}
 
 .topProfileBar{
     background: url(/src/img/profile.jpeg) center no-repeat;

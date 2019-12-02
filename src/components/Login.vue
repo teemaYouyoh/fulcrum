@@ -11,13 +11,14 @@
                     <h1>Login</h1>
                     <div class="textbox">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" v-model='userLogin'>
+                        <input type="text" placeholder="E-mail" v-model='userEmail'>
                     </div>
 
                     <div class="textbox">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" v-model='userPassword'>
-                        <i class="fas fa-eye"></i>
+                        <input type="password" placeholder="Password" v-model='userPassword' name='user-password'>
+            
+                        <i class="fas fa-eye" @mousedown="showPassword()" @mouseup="hidePassword()"></i>
                     </div>
 
                     <input type="button" class="btn" value="Sign in" @click="signIn()">
@@ -29,25 +30,25 @@
                     <h1>Sign Up</h1>
                     <div class="textbox">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" v-model="userName">
                     </div>
                     
                     <div class="textbox">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="E-mail">
+                        <input type="text" placeholder="E-mail" v-model="userEmail">
                     </div>
                         
                     <div class="textbox">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
-                        <i class="fas fa-eye"></i>
+                        <input type="password" placeholder="Password" v-model="userPassword" name='user-password'>
+                        <i class="fas fa-eye" @mousedown="showPassword()" @mouseup="hidePassword()"></i>
                     </div>
 
                     <div class="textbox" id="textAreaLogin">
                         <input type="textarea" placeholder="Enter information about yourself">
                     </div>
 
-                    <input type="button" class="btn" value="Sign up">
+                    <input type="button" class="btn" value="Sign up" @click="signUp()">
                     <p class="signUpLog">Already have account? <span> Sign in </span></p>
                 </div>
             </div>
@@ -61,6 +62,8 @@
 </template>
 
 <script>
+
+
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
@@ -77,29 +80,66 @@ export default {
     data(){
         return{
             users : [],
-            userLogin : '',
-            userPassword : ''
+            userName : '',
+            userPassword : '',
+            userEmail : ''
         }
     },
     mounted(){
-        Vue.axios("http://localhost:3000/users").then(response=>{
+        Vue.axios.get("http://localhost:3000/users").then(response=>{
             console.log(response.data);
             this.users = response.data;
-        })
-
+        });
     },
     methods : {
         signIn(){
-
-            console.log(this.$router.app._route.fullPath);
-
-            this.users.forEach(element => {
-                if(element.email == this.userLogin && element.password == this.userPassword){
-                    this.$store.commit('setCurrentUser', element);
-                    this.$router.push('/profile/' + element._id);
-                }
+            Vue.axios.get("http://localhost:3000/users").then(response=>{
+                console.log(response.data);
+                response.data.forEach(element => {
+                    if(element.email == this.userEmail && element.password == this.userPassword){
+                        this.$store.commit('setCurrentUser', element);
+                        this.$router.push('/profile/' + element._id);
+                    }
+                });
             });
-        }
+            
+        },
+        signUp(){
+            let isUser = false;
+            let user = {
+                about_u : {
+                    name : this.userName,
+                    phone : '',
+                    birthday : ''
+                },
+                email : this.userEmail,
+                password : this.userPassword,
+                avatar : '/src/img/face.png',
+                regist_date : '123'
+            };
+            this.users.forEach(element => {
+                if(element.email == user.email)                
+                    isUser = true;
+            });
+            if(!isUser){
+                Vue.axios.post("http://localhost:3000/users", JSON.parse(JSON.stringify(user))).then(response=>{
+                    console.log(response.data);
+                    this.signIn();        
+                });            
+            }
+            else {
+                alert('This email is already in use');
+            }
+
+        },
+        showPassword(){
+            document.getElementsByName('user-password')[0].type = 'text';
+            document.getElementsByName('user-password')[1].type = 'text';
+            },
+        hidePassword(){
+            document.getElementsByName('user-password')[0].type = 'password';
+            document.getElementsByName('user-password')[1].type = 'password';
+        },
     }
     
 }

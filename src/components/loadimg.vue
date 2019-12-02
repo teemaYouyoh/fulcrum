@@ -6,6 +6,7 @@
            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
    </label>
    <button v-on:click="submitFile()">Submit</button>
+   <button @click="getUserData()">geet</button>
     </div> 
 </template>
 
