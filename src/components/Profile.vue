@@ -7,7 +7,7 @@
                       <img class="profilePhoto" :src="user.avatar" @click="menuChanger()">
                       <h2>{{user.about_u.name}}</h2>
                   </div>
-                    <div class="editProfile" v-if="isCurrentUser == 'true'" v-show="changeMenu=='true'">
+                    <div class="editProfile" v-if="isCurrentUser == 'true'">
                         <label for="file">You can change your profile photo</label>
                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
                         
@@ -77,7 +77,7 @@ export default {
               phone : '',
               birthday : '',
               password : '',
-              changeMenu: 'false'
+              changeMenu: 'true'
           },
           user : {
               about_u : {
@@ -153,12 +153,13 @@ PROFILE
     display: flex;
     justify-content: center;
     flex-direction: column;
-
-    width: 25%;
+    /* float: right; */
+    width: 45%;
 }
 
 .editProfile input{
     margin-bottom: 1.45%;
+    padding: 1%;
 }
 
 .editProfile label{
@@ -311,6 +312,9 @@ PROFILE
     .editProfile{
         width: 75%;
     }
+    .topProfileBar h2{
+        font-size: 2.5rem;
+    }
 }
 
 @media screen and (max-width: 650px){
@@ -327,6 +331,7 @@ PROFILE
         justify-content: center;
         margin-top: 4%;
         margin-bottom: 1.5%;
+        font-size: 2rem;
     }
     .stand{
         font-size: 1rem;
@@ -338,6 +343,12 @@ PROFILE
     }
     .editProfile{
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .topProfileBar h2{
+        font-size: 1.5rem;
     }
 }
 </style>

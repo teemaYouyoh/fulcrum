@@ -44,7 +44,7 @@ creative people</p>
                           <img :src="work.image">
                           <div class="grid-hover">
                             <h1><router-link :to="'/single-page/'+work._id"> {{work.name}}</router-link> </h1>
-                            <p><router-link :to="'/profile/'+work.authorId"> {{work.author}}</router-link> </p>
+                            <p class="author"><router-link :to="'/profile/'+work.authorId"> {{work.author}}</router-link> </p>
                           </div>
                    </div>
                 </li>
@@ -174,12 +174,25 @@ export default {
 
 /* SUBHEADER */
 
+.author a{
+  text-decoration: none;
+  font-size: 1rem;
+  color: #000;
+  font-weight: 500;
+}
+
 .subHeader{
   background: #2b2b2b;
+    padding-left: 1%;
+  padding-right: 1%;
 }
 
 .subHeader .container{
   display : none;
+}
+
+.grid-item{
+  list-style-type: none;
 }
 
 .subHeader p{
@@ -188,13 +201,14 @@ export default {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+
 }
 
 .categorySub select,
 .kindSub select{
   background-color: transparent;
   color: #fff;
-  width: 200px;
+  max-width: 200px;
   /* min-height: 35px; */
   font-size: 1.6rem;
   text-align: center;
@@ -202,6 +216,8 @@ export default {
   padding: 7%;
   text-transform: uppercase;
   font-weight: 600;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .categorySub option,
@@ -444,6 +460,11 @@ li.grid-item img{
   .mainContentP{
     width: 85%;
     font-size: 38px;
+  }
+  .categorySub select,
+  .kindSub select{
+    font-size: 1.2rem;
+    padding: 2%;
   }
 }
 
