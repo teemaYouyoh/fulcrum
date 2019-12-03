@@ -4,16 +4,22 @@
         <div class="profile" id="ajax-content">
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
-                      <img class="profilePhoto" :src="user.avatar">
+                      <img class="profilePhoto" :src="user.avatar" @click="menuChanger()">
                       <h2>{{user.about_u.name}}</h2>
                   </div>
-                    <div class="editProfile" v-if="isCurrentUser == 'true'">
+                    <div class="editProfile" v-if="isCurrentUser == 'true'" v-show="changeMenu=='true'">
+                        <label for="file">You can change your profile photo</label>
                         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-                        <button v-on:click="submitFile()">Submit</button>
-                        <input type="text" placeholder="name" v-model="editUser.name">
-                        <input type="text" placeholder="phone" v-model="editUser.phone">
-                        <input type="text" placeholder="birthday" v-model="editUser.birthday">
-                        <input type="password" placeholder="password" v-model="editUser.password">
+                        
+                        <button v-on:click="submitFile()" id="submitBut">Submit</button>
+                        <label for="nameProf">Enter your Name</label>
+                        <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
+                         <label for="phoneProf">Enter your phone</label>
+                        <input type="text" placeholder="phone" v-model="editUser.phone" id="phoneProf">
+                         <label for="birthdayProf">Enter your birthday</label>
+                        <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf">
+                         <label for="passwordProf">Enter your new password</label>
+                        <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
                     </div>
                     
                   
@@ -71,6 +77,7 @@ export default {
               phone : '',
               birthday : '',
               password : '',
+              changeMenu: 'false'
           },
           user : {
               about_u : {
@@ -120,6 +127,14 @@ export default {
         this.user.avatar = '../uploads/image/' + this.user._id + '.jpg';
 
     },
+    menuChanger(){
+        if(this.changeMenu == 'false')
+        this.changeMenu = 'true'
+        else if(this.changeMenu == 'true') 
+        this.changeMenu = 'false'
+
+        // return this.changeMenu;
+    }
 
 
   }
@@ -133,6 +148,40 @@ export default {
 PROFILE
 ******************************
 */
+.editProfile{
+    padding: 1.5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 25%;
+}
+
+.editProfile input{
+    margin-bottom: 1.45%;
+}
+
+.editProfile label{
+    padding-bottom: 1%;
+}
+
+#submitBut{
+    margin-bottom: 1.5%;
+    padding: 0.75%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    color:#636e72;
+    transition: 0.5s;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+#submitBut:hover{
+    transition: 0.5s;
+    color:black;
+
+}
 
 .topProfileBar{
     background: url(/src/img/profile.jpeg) center no-repeat;
@@ -259,11 +308,15 @@ PROFILE
     .rightContentProfile{
         width: 100%;
     }
+    .editProfile{
+        width: 75%;
+    }
 }
 
 @media screen and (max-width: 650px){
     .profilePhoto{
         margin: 0 auto;
+        display: flex;
     }
     .topProfileBar{
         display: block;
@@ -282,6 +335,9 @@ PROFILE
     .telephoneContentProfile span,
     .birthdayContentProfile span{
         font-size: 1rem;
+    }
+    .editProfile{
+        width: 100%;
     }
 }
 </style>

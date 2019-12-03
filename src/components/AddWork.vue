@@ -210,6 +210,7 @@ label{
         flex-direction: column;
         padding-top: 3%;
         padding-right: 2%;
+        padding-left: 2%;
     }
     .leftSideAdd label{
         margin-top: 4%;
