@@ -224,6 +224,7 @@ export default {
 .kindSub option{
   height: 20px;
   font-size: 1rem;
+  color: #000;
 }
 
 .categorySub{

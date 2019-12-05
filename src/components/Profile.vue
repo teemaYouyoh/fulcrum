@@ -9,7 +9,7 @@
                   </div>
                     <div class="editProfile" v-if="isCurrentUser == 'true'">
                         <label for="file">You can change your profile photo</label>
-                        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+                        <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
                         
                         <button v-on:click="submitFile()" id="submitBut">Submit</button>
                         <label for="nameProf">Enter your Name</label>
@@ -152,14 +152,25 @@ PROFILE
     padding: 1.5%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     /* float: right; */
-    width: 45%;
 }
 
 .editProfile input{
-    margin-bottom: 1.45%;
-    padding: 1%;
+    margin-bottom: 1.15%;
+    padding: 0.5%;
+    border: 0.5px solid #050505;
+    border-radius: 15px;
+    text-align: center;
+}
+#file{
+    padding: 0.75%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid transparent;
 }
 
 .editProfile label{
@@ -171,16 +182,33 @@ PROFILE
     padding: 0.75%;
     text-align: center;
     cursor: pointer;
-    background-color: #f5f5f5;
-    color:#636e72;
-    transition: 0.5s;
+    background-color: #fff;
+    color: #000;
+    transition: 0.75s;
     font-size: 1.1rem;
     font-weight: 500;
+    border-radius: 25px;
+    border: 1px solid #000;
+    width: 15%;
+}
+
+.fileImg input{
+    padding: 0.25%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    font-size: 0.85rem;
+    border-radius: 15px;
+    border: 0.5px solid #000;
+
 }
 
 #submitBut:hover{
-    transition: 0.5s;
-    color:black;
+    transition: 0.75s;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #fff;
 
 }
 
@@ -315,6 +343,9 @@ PROFILE
     .topProfileBar h2{
         font-size: 2.5rem;
     }
+    #submitBut{
+        width: 25%;
+    }
 }
 
 @media screen and (max-width: 650px){
@@ -344,11 +375,17 @@ PROFILE
     .editProfile{
         width: 100%;
     }
+    #submitBut{
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 400px){
     .topProfileBar h2{
         font-size: 1.5rem;
+    }
+    #submitBut{
+        width: 75%;
     }
 }
 </style>
