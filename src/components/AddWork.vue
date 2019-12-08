@@ -25,6 +25,9 @@
                 </div>
                 <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
                 <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
+                <label for="file">You can change your profile photo</label>
+                <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
+                            
                 <div class="butBlock">
                         <button class="workAdderButton" @click="addWork()">Add work</button>
                 </div>
@@ -60,7 +63,7 @@
                 genreOfWork : '',
                 currentUser : {},
                 work : {
-                    name : 'Страна Низких',
+                    name : ' ',
                     section : 'Verses',
                     genre : 'Heart-to-heart',
                     author : '',
@@ -80,6 +83,11 @@
         },
         methods : {
             addWork(){
+                Vue.axios.put("http://localhost:3000/works/"+this.work._id, JSON.parse(JSON.stringify(this.work))).then(response => {
+                    console.log(response.data);
+                })
+            },
+            createWorkForImg(){
                 let d = new Date();
                 let curr_date = d.getDate();
                 let curr_month = d.getMonth() + 1;
@@ -89,7 +97,30 @@
                 this.work.authorId = this.currentUser._id;
                 Vue.axios.post("http://localhost:3000/works", JSON.parse(JSON.stringify(this.work))).then(response => {
                     console.log(response.data);
+                    this.work = response.data;
+                    this.submitFile();
+                    this.work.image = '../uploads/image/' + this.work._id + '.jpg';
                 })
+                
+            },
+            submitFile() {
+                let formData = new FormData();
+                formData.append('file', this.file);
+                formData.append('student_id', this.work._id);
+                Vue.axios.post('http://localhost:3000/uploadphoto', formData, { headers: {
+                        'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(function () {
+                        console.log('SUCCESS!!');
+                    })
+                    .catch(function () {
+                    console.log('FAILURE!!');
+                    });
+                },
+           handleFileUpload() {
+                this.file = this.$refs.file.files[0];
+                this.createWorkForImg();
+                this.work.image = '../uploads/image/' + this.work._id + '.jpg';
             },
         },
         computed : {
