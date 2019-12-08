@@ -2,6 +2,7 @@
     <div class="fullStackBlock">
         <Header />
         <div class="fullAddWorkBlock">
+            <div class="container">
                 <div class="fullSide">
               <div class="leftSideAdd">
                     <label for="nameOfWork">Enter the name of the work</label>
@@ -25,7 +26,7 @@
                 </div>
                 <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
                 <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
-                <label for="file">You can change your profile photo</label>
+                <label for="file">Upload your fulcrum photo</label>
                 <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
                             
                 <div class="butBlock">
@@ -33,7 +34,7 @@
                 </div>
                 
  
-        </div>
+        </div></div>
         <Footer />
     </div>
 </template>

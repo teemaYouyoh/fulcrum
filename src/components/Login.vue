@@ -158,6 +158,8 @@ LOGIN MENU
     -webkit-background-size: cover;
     background-size: cover; */
 background-color: #e2e2e2;
+padding-top: 2.5%;
+padding-bottom: 2.5%;
 }
 
 .signUpLog{

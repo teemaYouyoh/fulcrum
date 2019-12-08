@@ -40,23 +40,30 @@
                           </div>
                           
                           <div class="telephoneContentProfile">
-                              <p class="stand">My telephone number: <span class="infoProf">{{user.about_u.phone}}</span></p>
+                              <p class="stand">About me: <span class="infoProf">{{user.about_u.phone}}</span></p>
                           </div>
                           
-                          <div class="birthdayContentProfile">
+                          <!-- <div class="birthdayContentProfile">
                               <p class="stand">Birthday: <span class="infoProf">{{user.about_u.birthday}}</span></p>
-                          </div>
+                          </div> -->
                       </div>
                         
                   </div>
               </div>
               <div class="listOfWorks">
+                  <div class="container">
+                      <h3>My Fulcrums</h3>
                    <ul>
+                       <li>
+                           <a href="" class="topBarMyFulcrum">Name of fulcrum</a>
+                           <span></span>
+                       </li>
                        <li v-for="work in works" v-bind:key="work._id">
                            <router-link :to="'/single-page/'+work._id">{{work.name}}</router-link> 
-                           <span @click="deleteWork(work._id)">удалить</span>    
+                           <span @click="deleteWork(work._id)">delete</span>    
                        </li>
                    </ul>
+                   </div>
                </div>
         </div>
         <!-- <AddWork v-if="isCurrentUser == 'true'" /> -->
@@ -185,7 +192,59 @@ export default {
 </script>
 
 <style scoped>
+.topBarMyFulcrum{
+    padding-top: 1%;
+    padding-bottom: 1%;
 
+}
+
+.listOfWorks{
+    padding-bottom: 2.5%;
+    background-color: #f5f5f5;
+        padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.listOfWorks h3{
+    text-align: center;
+    font-size: 2.1rem;
+    font-weight: 600;
+    padding-top: 2%;
+    text-transform: uppercase;
+}
+
+.listOfWorks li{
+    list-style-type: none;
+    padding-top: 1%;
+    display: flex;
+    justify-content: space-between;    
+}
+
+.listOfWorks li span{
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.75s;
+    cursor: pointer;
+}
+
+.listOfWorks li span:hover{
+    transition: 0.75s;
+    color: rgb(133, 3, 3);
+}
+
+.listOfWorks li a{
+text-decoration: none;
+    color: rgb(29, 29, 29);
+    font-size: 1.5rem;
+    transition: 0.25s;
+    font-weight: normal;
+}
+
+.listOfWorks li a:hover{
+    font-weight: 600;
+    transition: 0.25s;
+}
 /*
 ******************************
 PROFILE
@@ -194,6 +253,7 @@ PROFILE
 
 .editProfile{
     display: none;
+    background-color: #f5f5f5;
 }
 
 .editProfile .container{
@@ -201,6 +261,7 @@ PROFILE
     display: flex;
     justify-content: center;
     align-items: center;
+    
     flex-direction: column;
     /* float: right; */
 }
@@ -216,7 +277,8 @@ PROFILE
     padding: 0.75%;
     text-align: center;
     cursor: pointer;
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #f5f5f5;
     color: #000;
     border: 1px solid transparent;
 }

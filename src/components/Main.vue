@@ -370,13 +370,18 @@ li.grid-item{
   position:relative;
   float:left;
   padding:15px;
-  
+  max-height: 250px;
+  padding-bottom: 3%;
+  overflow: hidden;
 }
 
 .grid-hover{
   position: absolute;
   width:360px;
   height: 100%;
+    max-height: 250px;
+  padding-bottom: 3%;
+  overflow: hidden;
   top:0;
   background: white;
   z-index: 2;
@@ -484,7 +489,9 @@ li.grid-item img{
     .grid-hover{
       display: flex;
       justify-content: center;
+      min-height: 245px;
     }
+    
     
 }
 @media screen and (max-width: 600px){
@@ -496,6 +503,9 @@ li.grid-item img{
   .kindSub select{
     font-size: 1.2rem;
     padding: 2%;
+  }
+  .grid-hover{
+    min-height: 245px;
   }
 }
 
