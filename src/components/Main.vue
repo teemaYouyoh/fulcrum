@@ -24,6 +24,9 @@
             </select>
           </div>
         </div>
+            <div class="searchSub">
+              <input type="text" placeholder="search your fulcrum">
+            </div>  
       </div>
     </div>
 
@@ -84,6 +87,7 @@ export default {
             typeOfWork : 'All',
             genreOfWork : 'All',
             isActiveSubHeader: 'false',
+            searching: ''
         }
     },
     mounted(){
@@ -187,6 +191,23 @@ export default {
   padding-right: 1%;
 }
 
+.searchSub{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.searchSub input{
+  padding: 1%;
+  margin-top: 2.5%;
+  background-color: transparent;
+  color: #fff;
+  font-size: 1.05rem;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  text-align: center;
+}
+
 .subHeader .container{
   display : none;
 }
@@ -210,10 +231,10 @@ export default {
   color: #fff;
   max-width: 200px;
   /* min-height: 35px; */
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   text-align: center;
   border-radius: 25px;
-  padding: 7%;
+  padding: 10%;
   text-transform: uppercase;
   font-weight: 600;
   margin-left: 2%;

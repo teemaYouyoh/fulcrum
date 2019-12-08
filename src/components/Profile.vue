@@ -11,7 +11,7 @@
                         <label for="file">You can change your profile photo</label>
                         <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
                         
-                        <button v-on:click="submitFile()" id="submitBut">Submit</button>
+                        
                         <label for="nameProf">Enter your Name</label>
                         <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
                          <label for="phoneProf">Enter your phone</label>
@@ -20,6 +20,7 @@
                         <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf">
                          <label for="passwordProf">Enter your new password</label>
                         <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
+                        <button v-on:click="submitFile()" id="submitBut">Submit</button>
                     </div>
                     
                   

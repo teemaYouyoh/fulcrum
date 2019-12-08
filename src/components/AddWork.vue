@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="fullStackBlock">
+        <Header />
         <div class="fullAddWorkBlock">
                 <div class="fullSide">
               <div class="leftSideAdd">
@@ -30,7 +31,7 @@
                 
  
         </div>
-        
+        <Footer />
     </div>
 </template>
 
@@ -118,6 +119,15 @@
 </script>
 
 <style scoped>
+
+.fullStackBlock{
+    display: flex;
+    flex-direction: column;
+}
+body{
+    height: 100%;
+}
+
 .fullAddWorkBlock{
     padding-top: 2.5%;
     padding-bottom: 2.5%;
