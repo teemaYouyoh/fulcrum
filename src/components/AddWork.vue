@@ -123,6 +123,7 @@
 .fullStackBlock{
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 body{
     height: 100%;
@@ -132,6 +133,7 @@ body{
     padding-top: 2.5%;
     padding-bottom: 2.5%;
     background-color: #f5f5f5;
+    flex: 1 0 auto;
 
 }
 

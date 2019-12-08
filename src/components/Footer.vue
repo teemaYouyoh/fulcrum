@@ -21,6 +21,7 @@ FOOTER
     min-height: 80px;
     padding-top: 2%;
     padding-bottom: 1.5%;
+    flex: 0 0 auto;
 }
 
 .bookFooter{
