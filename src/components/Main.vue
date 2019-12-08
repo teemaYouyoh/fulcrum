@@ -25,7 +25,7 @@
           </div>
         </div>
             <div class="searchSub">
-              <input type="text" placeholder="search your fulcrum">
+              <input type="text" placeholder="search your fulcrum" v-model="searching">
             </div>  
       </div>
     </div>
@@ -145,11 +145,20 @@ export default {
     computed : {
       listOfWorks(){
         return this.works.filter(item => {
-          if(this.typeOfWork == 'All') return true;
-          else if(item.section.toLowerCase() == this.typeOfWork.toLowerCase() 
-                  && (item.genre.toLowerCase() == this.genreOfWork.toLowerCase() 
-                  || this.genreOfWork == "All")) return true;
+          if(this.searching == ''){
+            if(this.typeOfWork == 'All') return true;
+            else if(item.section.toLowerCase() == this.typeOfWork.toLowerCase() 
+                    && (item.genre.toLowerCase() == this.genreOfWork.toLowerCase() 
+                    || this.genreOfWork == "All")) return true;
+          }
+          else if(item.name.toLowerCase().indexOf(this.searching.toLowerCase()) != -1){
+            if(this.typeOfWork == 'All') return true;
+            else if(item.section.toLowerCase() == this.typeOfWork.toLowerCase() 
+                    && (item.genre.toLowerCase() == this.genreOfWork.toLowerCase() 
+                    || this.genreOfWork == "All")) return true;
+          }
         })
+        
       },
       listTypesOfWorks(){
         let types = [];

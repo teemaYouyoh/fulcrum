@@ -3,11 +3,11 @@
         <Header/>
         <div class="clear"></div>
 
-        <div class="login" id="ajax-content">
+        <div class="login" id="ajax-content" >
 
             <div class="text-intro" id="site-type">
 
-                <div class="login-box">
+                <div class="login-box" v-if="isSignIn == 'true'">
                     <h1>Login</h1>
                     <div class="textbox">
                         <i class="fas fa-user"></i>
@@ -22,11 +22,11 @@
                     </div>
 
                     <input type="button" class="btn" value="Sign in" @click="signIn()">
-                    <p class="signUpLog">Don't have account? <span> Sign up </span></p>
+                    <p class="signUpLog">Don't have account? <span @click="isSignIn = 'false'"> Sign up </span></p>
                 </div>
                 
                 
-                <div class="reg-box">
+                <div class="reg-box" v-else-if="isSignIn == 'false'">
                     <h1>Sign Up</h1>
                     <div class="textbox">
                         <i class="fas fa-user"></i>
@@ -49,7 +49,7 @@
                     </div>
 
                     <input type="button" class="btn" value="Sign up" @click="signUp()">
-                    <p class="signUpLog">Already have account? <span> Sign in </span></p>
+                    <p class="signUpLog">Already have account? <span @click='isSignIn = "true"'> Sign in </span></p>
                 </div>
             </div>
         <!--Portfolio grid-->
@@ -82,7 +82,8 @@ export default {
             users : [],
             userName : '',
             userPassword : '',
-            userEmail : ''
+            userEmail : '',
+            isSignIn : 'true'
         }
     },
     mounted(){

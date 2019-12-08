@@ -4,23 +4,26 @@
         <div class="profile" id="ajax-content">
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
-                      <img class="profilePhoto" :src="user.avatar" @click="menuChanger()">
+                      <img class="profilePhoto" :src="user.avatar" @click="isActiveEditProfileFunction()">
                       <h2>{{user.about_u.name}}</h2>
                   </div>
                     <div class="editProfile" v-if="isCurrentUser == 'true'">
-                        <label for="file">You can change your profile photo</label>
-                        <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
+                        <div class="container">
+                            <label for="file">You can change your profile photo</label>
+                            <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
+                            
+                            
+                            <label for="nameProf">Enter your Name</label>
+                            <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
+                            <label for="phoneProf">Enter your email</label>
+                            <input type="text" placeholder="email" v-model="editUser.email" id="phoneProf">
+                            <!-- <label for="birthdayProf">Enter your birthday</label>
+                            <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf"> -->
+                            <label for="passwordProf">Enter your new password</label>
+                            <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
+                            <button v-on:click="submitFile()" id="submitBut">Submit</button>
+                        </div>
                         
-                        
-                        <label for="nameProf">Enter your Name</label>
-                        <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
-                         <label for="phoneProf">Enter your email</label>
-                        <input type="text" placeholder="email" v-model="editUser.email" id="phoneProf">
-                         <!-- <label for="birthdayProf">Enter your birthday</label>
-                        <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf"> -->
-                         <label for="passwordProf">Enter your new password</label>
-                        <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
-                        <button v-on:click="submitFile()" id="submitBut">Submit</button>
                     </div>
                     
                   
@@ -44,8 +47,17 @@
                               <p class="stand">Birthday: <span class="infoProf">{{user.about_u.birthday}}</span></p>
                           </div>
                       </div>
+                        
                   </div>
               </div>
+              <div class="listOfWorks">
+                   <ul>
+                       <li v-for="work in works" v-bind:key="work._id">
+                           <router-link :to="'/single-page/'+work._id">{{work.name}}</router-link> 
+                           <span @click="deleteWork(work._id)">удалить</span>    
+                       </li>
+                   </ul>
+               </div>
         </div>
         <!-- <AddWork v-if="isCurrentUser == 'true'" /> -->
       
@@ -63,7 +75,11 @@
     import Header from './Header.vue' 
     import Footer from './Footer.vue' 
     import AddWork from './AddWork.vue'
+
     Vue.use(VueAxios, axios)
+
+    var $ = require('jquery');
+
 
 export default {
   components : {
@@ -78,7 +94,7 @@ export default {
               email : '',
               birthday : '',
               password : '',
-              changeMenu: 'true'
+              isActiveEditProfile : 'false'
           },
           user : {
               about_u : {
@@ -87,21 +103,50 @@ export default {
                   birthday : '',
               }
           },
-          isCurrentUser : 'false'
+          isCurrentUser : 'false',
+          works : []
       }
   },
   mounted(){      
       Vue.axios.get('http://localhost:3000/users/'+this.$route.params.id).then(response => {
           console.log(response.data);
           this.user = response.data;
+          this.editUser.name = response.data.about_u.name;
+          this.editUser.email = response.data.email;
+          this.editUser.password = response.data.password;
+          this.editUser.birthday = response.data.birthday;
           
 
           let currentUser = this.$store.getters.getCurrentUser;
           if(currentUser !== null && currentUser._id == this.user._id)
             this.isCurrentUser = 'true';
       });
+      Vue.axios.get('http://localhost:3000/works').then(response => {
+          console.log(response.data);
+          response.data.forEach(element => {
+              if(element.authorId == this.user._id)
+                this.works.push(element);
+          });
+          console.log(this.works);
+
+      });
   },
   methods : {
+    deleteWork(value){
+        Vue.axios.delete('http://localhost:3000/works/'+value).then(response=>{
+            console.log(response.data);
+            Vue.axios.get('http://localhost:3000/works').then(response => {
+                console.log(response.data);
+                this.works = [];
+                response.data.forEach(element => {
+                    if(element.authorId == this.user._id)
+                        this.works.push(element);
+                });
+                console.log(this.works);
+
+            });
+        })
+    },
     async submitFile() {
          let formData = new FormData();
          formData.append('file', this.file);
@@ -128,14 +173,11 @@ export default {
         this.user.avatar = '../uploads/image/' + this.user._id + '.jpg';
 
     },
-    menuChanger(){
-        if(this.changeMenu == 'false')
-        this.changeMenu = 'true'
-        else if(this.changeMenu == 'true') 
-        this.changeMenu = 'false'
-
-        // return this.changeMenu;
-    }
+    isActiveEditProfileFunction(){
+        $(".editProfile").animate({
+            height: 'toggle'
+        }, "slow");
+    },
 
 
   }
@@ -149,7 +191,12 @@ export default {
 PROFILE
 ******************************
 */
+
 .editProfile{
+    display: none;
+}
+
+.editProfile .container{
     padding: 1.5%;
     display: flex;
     justify-content: center;
@@ -267,6 +314,7 @@ PROFILE
     background-size: cover;
     margin-left: 5%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 
 .fullContentProfile{
