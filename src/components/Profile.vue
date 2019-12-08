@@ -14,10 +14,10 @@
                         
                         <label for="nameProf">Enter your Name</label>
                         <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
-                         <label for="phoneProf">Enter your phone</label>
-                        <input type="text" placeholder="phone" v-model="editUser.phone" id="phoneProf">
-                         <label for="birthdayProf">Enter your birthday</label>
-                        <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf">
+                         <label for="phoneProf">Enter your email</label>
+                        <input type="text" placeholder="email" v-model="editUser.email" id="phoneProf">
+                         <!-- <label for="birthdayProf">Enter your birthday</label>
+                        <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf"> -->
                          <label for="passwordProf">Enter your new password</label>
                         <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
                         <button v-on:click="submitFile()" id="submitBut">Submit</button>
@@ -47,7 +47,7 @@
                   </div>
               </div>
         </div>
-        <AddWork v-if="isCurrentUser == 'true'" />
+        <!-- <AddWork v-if="isCurrentUser == 'true'" /> -->
       
      <Footer/>
    </div>
@@ -75,7 +75,7 @@ export default {
       return{
           editUser : {
               name : '',
-              phone : '',
+              email : '',
               birthday : '',
               password : '',
               changeMenu: 'true'
@@ -83,7 +83,7 @@ export default {
           user : {
               about_u : {
                   name : '',
-                  phone : '',
+                  email : '',
                   birthday : '',
               }
           },
@@ -116,7 +116,7 @@ export default {
              console.log('FAILURE!!');
              });
             this.user.about_u.name = this.editUser.name;
-            this.user.about_u.phone = this.editUser.phone;
+            this.user.about_u.email = this.editUser.email;
             this.user.about_u.birthday = this.editUser.birthday;
             this.user.password = this.editUser.password;
             Vue.axios.put('http://localhost:3000/users/'+this.user._id, JSON.parse(JSON.stringify(this.user))).then(response=>{

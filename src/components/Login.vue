@@ -153,15 +153,16 @@ LOGIN MENU
 *******************
 */
 .login{
-     background: url(/src/img/bg2.jpeg)center no-repeat;
+     /* background: url(/src/img/bg2.jpeg)center no-repeat;
     -webkit-background-size: cover;
-    background-size: cover;
+    background-size: cover; */
+background-color: #e2e2e2;
 }
 
 .signUpLog{
     text-align: center;
     font-size: 2.35rem;
-    color: #fff;
+    color: rgb(138, 138, 138);
     font-weight: 600;
     padding-bottom: 15%;
 }
@@ -176,13 +177,13 @@ LOGIN MENU
 .reg-box{
   width: 280px;
     margin: 0 auto;
-  color: white;
+  color: rgb(138, 138, 138);
 }
 .login-box h1,
 .reg-box h1{
   text-align: center;
   font-size: 30px;
-  border-bottom: 6px solid #f5f5f5;
+  border-bottom: 6px solid rgb(138, 138, 138);
   margin-bottom: 50px;
   padding: 13px 0;
     padding-top: 20%;
@@ -196,7 +197,7 @@ LOGIN MENU
   padding: 8px 0;
   display: flex;
     justify-content: center;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgb(138, 138, 138);
 }
 .textbox i{
     min-width: 37px;
@@ -213,7 +214,7 @@ LOGIN MENU
   border: none;
   outline: none;
   background: none;
-  color: white;
+  color: rgb(138, 138, 138);
   font-size: 18px;
   width: 80%;
   margin: 0 10px;
@@ -222,8 +223,8 @@ LOGIN MENU
 .btn{
   width: 100%;
   background: none;
-  border: 2px solid #f5f5f5;
-  color: white;
+  border: 2px solid rgb(138, 138, 138);
+  color: rgb(138, 138, 138);
   font-size: 18px;
   cursor: pointer;
   margin-bottom: 5%;

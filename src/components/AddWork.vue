@@ -130,8 +130,8 @@ body{
 }
 
 .fullAddWorkBlock{
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
+    padding-top: 5.5%;
+    padding-bottom: 3%;
     background-color: #f5f5f5;
     flex: 1 0 auto;
 
