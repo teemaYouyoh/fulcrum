@@ -11,12 +11,12 @@
                     {{work}}
                 </div>
 
-                <div class="functionsOnePage">
+                <!-- <div class="functionsOnePage">
                     <div class="downloadBut">
                         Download
                     </div>
                     <div class="readAllMore">Read More</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <Footer />

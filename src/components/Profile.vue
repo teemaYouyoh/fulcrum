@@ -35,9 +35,9 @@
                       </div>
                       
                       <div class="rightContentProfile">
-                          <div class="emailContentProfile">
+                          <!-- <div class="emailContentProfile">
                               <p class="stand">My mailbox: <span class="infoProf">{{user.email}}</span></p>
-                          </div>
+                          </div> -->
                           
                           <div class="telephoneContentProfile">
                               <p class="stand">About me: <span class="infoProf">{{user.about_u.phone}}</span></p>
@@ -53,16 +53,33 @@
               <div class="listOfWorks">
                   <div class="container">
                       <h3>My Fulcrums</h3>
-                   <ul>
-                       <li>
-                           <a href="" class="topBarMyFulcrum">Name of fulcrum</a>
-                           <span></span>
-                       </li>
-                       <li v-for="work in works" v-bind:key="work._id">
-                           <router-link :to="'/single-page/'+work._id">{{work.name}}</router-link> 
-                           <span @click="deleteWork(work._id)">delete</span>    
+                   <ul class="portfolio-grid" id="works">
+                       <li v-for="work in works" v-bind:key="work._id" class="grid-item">
+                           <!-- <router-link :to="'/single-page/'+work._id">{{work.name}}</router-link>  -->
+                           <div class="items_wrap">
+                          <img :src="work.image">
+                          <div class="grid-hover">
+                            <h1><router-link :to="'/single-page/'+work._id"> {{work.name}}</router-link> </h1>
+                            <p class="author"><router-link :to="'/profile/'+work.authorId"> {{work.author}}</router-link> </p>
+                          </div>
+                   </div>
+                           <!-- <span @click="deleteWork(work._id)">delete</span>     -->
                        </li>
                    </ul>
+
+                   <!-- <ul class="portfolio-grid" id="works">
+
+                <li v-for="work in listOfWorks" class="grid-item" v-bind:key="work._id">
+                   <div class="items_wrap">
+                          <img :src="work.image">
+                          <div class="grid-hover">
+                            <h1><router-link :to="'/single-page/'+work._id"> {{work.name}}</router-link> </h1>
+                            <p class="author"><router-link :to="'/profile/'+work.authorId"> {{work.author}}</router-link> </p>
+                          </div>
+                   </div>
+                </li>
+
+            </ul> -->
                    </div>
                </div>
         </div>
@@ -192,10 +209,84 @@ export default {
 </script>
 
 <style scoped>
+
+
+.portfolio-grid{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-around; 
+  overflow:hidden;
+}
+
+li.grid-item{
+  width: 33%;
+  position:relative;
+  float:left;
+  padding:15px;
+  max-height: 250px;
+  padding-bottom: 3%;
+  overflow: hidden;
+}
+
+.grid-hover{
+  position: absolute;
+  width:360px;
+  height: 100%;
+    min-height: 250px;
+  padding-bottom: 3%;
+  overflow: hidden;
+  top:0;
+  background: white;
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in; 
+}
+
+.grid-hover:hover{
+  opacity: 0.9;
+}
+
+.grid-hover h1{
+  font-size:23px;
+  bottom:80px;
+  left:40px;
+  position:absolute;
+  text-transform:uppercase;
+  color:#000000;
+  letter-spacing:1px;
+  font-weight:900;
+  line-height:50px;
+}
+
+.grid-hover h1 a{
+  color: #000;
+  text-decoration: none;
+}
+
+.grid-hover p{
+  font-size:13px;
+  bottom:40px;
+  left:40px;
+  position:absolute;
+  color:#686868;
+  letter-spacing:1px;
+  font-weight:400;
+  line-height:50px;
+}
+
+li.grid-item img{
+  width:360px;
+}
 .topBarMyFulcrum{
     padding-top: 1%;
     padding-bottom: 1%;
-
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .listOfWorks{
@@ -209,7 +300,8 @@ export default {
     text-align: center;
     font-size: 2.1rem;
     font-weight: 600;
-    padding-top: 2%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
     text-transform: uppercase;
 }
 
@@ -236,7 +328,7 @@ export default {
 .listOfWorks li a{
 text-decoration: none;
     color: rgb(29, 29, 29);
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     transition: 0.25s;
     font-weight: normal;
 }
@@ -323,10 +415,11 @@ PROFILE
 }
 
 .topProfileBar{
-    background: url(/src/img/profile.jpeg) center no-repeat;
+    /* background: url(/src/img/profile.jpeg) center no-repeat;
     -webkit-background-size: cover;
-    background-size: cover;
+    background-size: cover; */
     display: flex;
+    background-color: rgb(10, 10, 10);
     padding-top: 1.5%;
     padding-bottom: 1.5%;
 }
