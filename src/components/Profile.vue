@@ -156,21 +156,21 @@ export default {
       });
   },
   methods : {
-    deleteWork(value){
-        Vue.axios.delete('http://localhost:3000/works/'+value).then(response=>{
-            console.log(response.data);
-            Vue.axios.get('http://localhost:3000/works').then(response => {
-                console.log(response.data);
-                this.works = [];
-                response.data.forEach(element => {
-                    if(element.authorId == this.user._id)
-                        this.works.push(element);
-                });
-                console.log(this.works);
+    // deleteWork(value){
+    //     Vue.axios.delete('http://localhost:3000/works/'+value).then(response=>{
+    //         console.log(response.data);
+    //         Vue.axios.get('http://localhost:3000/works').then(response => {
+    //             console.log(response.data);
+    //             this.works = [];
+    //             response.data.forEach(element => {
+    //                 if(element.authorId == this.user._id)
+    //                     this.works.push(element);
+    //             });
+    //             console.log(this.works);
 
-            });
-        })
-    },
+    //         });
+    //     })
+    // },
     async submitFile() {
          let formData = new FormData();
          formData.append('file', this.file);
