@@ -35,7 +35,7 @@
     "fs": "0.0.1-security",
     "https": "^1.0.0",
     "https-localhost": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery.easing": "^1.4.1",
     "jquery.waitforimages": "^2.4.0",
     "masonry": "0.0.2",
