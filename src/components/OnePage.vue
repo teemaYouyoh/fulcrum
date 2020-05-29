@@ -6,7 +6,7 @@
                 <div class="authorBlock">
                     <h2>{{work.name}}</h2>
                     <router-link :to="'/profile/'+work.authorId"><p>{{work.author}}</p></router-link>
-                    <p v-if="isAuthor == 'true'"  class="deleteButton" @click="isEdit = !isEdit">РЕДАГУВАТИ</p>
+                    <p v-if="isAuthor == 'true'"  class="deleteButton" @click="editWork()">РЕДАГУВАТИ</p>
                     <p v-if="isAuthor == 'true'" @click="active = !active" class="deleteButton">УДАЛИТЬ</p>
                 </div>
                 <div v-show="active" class="warning">
@@ -28,7 +28,7 @@
 
                 <!-- <FileReader v-bind:text="work.text"/> -->
 
-                <div class="learn__more" @click="() => isHidden = !isHidden">{{!isHidden ? "Детальніше" : "Приховати"}}</div>
+                <!-- <div class="learn__more" @click="() => isHidden = !isHidden">{{!isHidden ? "Детальніше" : "Приховати"}}</div> -->
                 
                 <div class="functionsOnePage">
                     <div class="downloadBut" @click="downloadText(work._id)">
@@ -109,7 +109,12 @@ export default {
                 this.$router.push('/');
             })
         },
-
+        editWork(){
+            Vue.axios.put('http://localhost:3000/works/'+this.work._id, JSON.parse(JSON.stringify(this.work))).then((response)=>{
+                console.log("success");
+                this.$router.push('/');
+            })
+        },
         onConfirm() {
         this.value = 'Agreed'
         },
@@ -190,6 +195,20 @@ export default {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1%;
+}
+
+#textArea{
+    max-width: 600px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.082);
+    margin: auto;
+    width: 100%;
+    display: flex;
+    border: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    resize: none;
 }
 
 .downloadBut,

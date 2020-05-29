@@ -52,6 +52,11 @@ creative people</p>
                    </div>
                 </li>
 
+                <li class="warning__main" v-if="listOfWorks == false">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <p class="warning__message">Вибачте, нічого не знайшлось. Спробуйте ще раз</p>
+                </li>
+
             </ul>
        </div>
    </div>
@@ -186,7 +191,19 @@ export default {
 <style scoped>
 
 /* SUBHEADER */
-
+.warning__main{
+  list-style: none;
+  padding: 40px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.warning__message{
+  font-size: 28px;
+  color: #797979;
+  font-weight: 700;
+  padding-top: 15px;
+}
 .author a{
   text-decoration: none;
   font-size: 1rem;
@@ -337,6 +354,11 @@ export default {
 
 .infoProjContent i:hover{
   color: black;
+}
+
+.fa-exclamation-triangle{
+  font-size: 170px;
+  color: rgba(141, 16, 16, 0.938);
 }
 
 /*
