@@ -33,10 +33,7 @@
                 <div class="butBlock">
                         <button class="workAdderButton" @click="addWork()">Add work</button>
                 </div>
-                      <label>File
-                        <input type="file" id="file" ref="file" v-on:change="handleFileTextUpload()"/>
-                      </label>
-                        <button v-on:click="submitFileText()">Submit</button>
+
  
         </div></div>
         <Footer />
@@ -153,12 +150,12 @@
                 this.createWorkForImg();
                 this.work.image = '../uploads/image/' + this.work._id + '.jpg';
             },
-            handleFileTextUpload() {
-                this.file = this.$refs.file.files[1];
+            // handleFileTextUpload() {
+            //     this.file = this.$refs.file.files[1];
                 
-                // this.createWorkForImg();
-                // this.work.image = '../uploads/image/' + this.work._id + '.jpg';
-            },
+            //     // this.createWorkForImg();
+            //     // this.work.image = '../uploads/image/' + this.work._id + '.jpg';
+            // },
         },
         computed : {
             listTypesOfWorks(){

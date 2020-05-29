@@ -89,9 +89,12 @@ export default {
         Vue.axios.get("http://localhost:3000/works/" + this.$route.params.id).then(response=>{
             console.log(response.data);
             this.work = response.data;
-            document.getElementById('txt').innerHTML = this.work.text;
+            document.getElementById('textArea').innerHTML = this.work.text;
             let currentUser= this.$store.getters.getCurrentUser;
-            if(this.work.authorId == currentUser._id) this.isAuthor ='true';
+            console.log(this.work.authorId, currentUser._id);
+            if(this.work.authorId == currentUser._id){ 
+                this.isAuthor ='true';
+            }
         })
         // var s = '<h1 id="myDiv">asdas</h1>';
         // var htmlObject = document.getElementById('txt');
