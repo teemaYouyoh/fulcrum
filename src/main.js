@@ -12,6 +12,7 @@ import Profile from './components/Profile.vue'
 import OnePage from './components/OnePage.vue'
 import AddWork from './components/AddWork.vue'
 import Loadimg from './components/loadimg.vue'
+import FileReader from './components/FileReader.vue'
 
 import store from "./store.js";
 
@@ -24,7 +25,8 @@ const routes = [
     { path : '/profile/:id', component : Profile},
     { path : '/single-page/:id', component: OnePage},
     { path : '/add-work', component: AddWork},
-    { path : '/loadimg', component: Loadimg}
+    { path : '/loadimg', component: Loadimg},
+    { path : '/fr', component: FileReader}
 ]
 
 const router = new VueRouter({

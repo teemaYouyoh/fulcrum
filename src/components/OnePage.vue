@@ -16,23 +16,26 @@
                        <button class="button__warning disuccess" @click="active =!active">Ні</button>
                    </div>
                 </div>
-                <div v-show="isEdit == true">
+                <textarea name="" id="textArea" v-model="work.text" cols="30" rows="10"></textarea>
+                <!-- <div v-show="isEdit == true">
                     <textarea name="" v-model="work.text" id="" cols="30" rows="10">
                         
                     </textarea>
                 </div>
                 <div  v-show="isEdit == false" class="fullArticleBlock"  v-bind:class="!isHidden ? 'text' : 'new__text'" >
                    {{work.text}}
-                </div>
+                </div> -->
+
+                <!-- <FileReader v-bind:text="work.text"/> -->
 
                 <div class="learn__more" @click="() => isHidden = !isHidden">{{!isHidden ? "Детальніше" : "Приховати"}}</div>
                 
-                <!-- <div class="functionsOnePage">
-                    <div class="downloadBut">
+                <div class="functionsOnePage">
+                    <div class="downloadBut" @click="downloadText(work._id)">
                         Download
                     </div>
                     <div class="readAllMore">Read More</div>
-                </div> -->
+                </div>
             </div>
         </div>
         <Footer />
@@ -44,12 +47,15 @@
     import Vuex from "vuex";
     import axios from "axios";
     import VueAxios from "vue-axios";
-    import VueMaterial from 'vue-material'
+    import VueMaterial from 'vue-material';
+    
     // import clampy from '@clampy-js/vue-clampy';
     // import 'vue-material/dist/vue-material.min.css'
     // import 'vue-material/dist/theme/default.css'
     import Header from './Header.vue' 
-    import Footer from './Footer.vue' 
+    import Footer from './Footer.vue'
+    import FileReader from "./FileReader.vue"
+
     Vue.use(VueMaterial)
     Vue.use(VueAxios, axios)
 // Vue.use(clampy);
@@ -63,7 +69,8 @@ export default {
     // },
     components: {
         Header,
-        Footer
+        Footer,
+        FileReader,
     },
     data(){
         return{
@@ -72,7 +79,10 @@ export default {
             active: false,
             value: null,
             isEdit: false,
-            isHidden: false
+            isHidden: false,
+            text: `sadasdassas
+                    asdsada
+                    asdasd`,
         }
     },
     mounted(){
@@ -89,18 +99,42 @@ export default {
         // this.work = htmlObject;
     },
     methods : {
-        deleteWork(){
+        deleteWork() {
 
             Vue.axios.delete('http://localhost:3000/works/'+this.work._id).then(response=>{
                 console.log(response.data);
                 this.$router.push('/');
             })
         },
-        onConfirm () {
+
+        onConfirm() {
         this.value = 'Agreed'
         },
-        onCancel () {
+
+        onCancel() {
             this.value = 'Disagreed'
+        },
+
+        downloadText(id) {
+            var textToWrite = document.getElementById('textArea').value;
+            var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
+            var fileNameToSaveAs = `${id}.txt`;
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null) {
+                // Chrome allows the link to be clicked without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            } else {
+                // Firefox requires the link to be added to the DOM before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = destroyClickedElement;
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+            }
+
+            downloadLink.click();
         }
     }
 }

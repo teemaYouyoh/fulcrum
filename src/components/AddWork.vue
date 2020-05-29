@@ -18,11 +18,12 @@
               </div>  
                 <!-- <input type="text" > -->
                 <div class="rightSideAdd">
-                    <label for="textAreaText">Enter your work please</label>
-                    <textarea v-model="work.text" id="textAreaText" v-on:change="handleEnter()" v-on:keyup="handleTextArea">
+                    <label for="textAreaText">Enter your work please or load text from file</label>
+                    <textarea v-model="work.text" id="textAreaText" v-on:change="handleChange" v-on:keyup="handleTextArea">
 
                     </textarea>
                 </div>
+                <FileReaderButton @load="work.text = $event"></FileReaderButton>
                 </div>
                 <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
                 <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
@@ -51,13 +52,15 @@
 
     import Header from './Header.vue' 
     import Footer from './Footer.vue' 
+    import FileReaderButton from "./FileReaderButton.vue";
 
     Vue.use(VueAxios, axios)
 
     export default {
-        components : {
+        components: {
             Header,
-            Footer
+            Footer,
+            FileReaderButton,
         },
         data(){
             return{
@@ -68,6 +71,7 @@
                 currentUser : {},
                 showedText: '',
                 file: '',
+                text: '', 
                 work : {
                     name : ' ',
                     section : '',
@@ -100,9 +104,9 @@
                 console.log(formData);
             },
             handleTextArea : function(e) {
-            if (e.keyCode === 13) {
-                this.work.text += "</br>"
-            } 
+            // if (e.keyCode === 13) {
+            //     this.work.text += "</br>"
+            // } 
             // else if (e.keyCode === 50) {
             //     alert('@ was pressed');
             // }      
@@ -110,7 +114,9 @@
             //  console.log(this.work.text);
             },
             noop(){},
-            handleEnter : function(){
+            handleChange : function(e) {
+                this.text = JSON.stringify(e.target.value);
+                console.log(e.target.value);
             },
             createWorkForImg(){
                 let d = new Date();
