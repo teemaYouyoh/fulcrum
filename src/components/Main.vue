@@ -4,7 +4,7 @@
 
     <div class="subHeader">
       <div class="container">
-                  <p>Filter like you want:</p>
+                  <p>Знайди те, що тобі подобається:</p>
         <div class="navSubHeader">
           <!-- <div class="subHeaderCategory">Category</div>
           <div class="subHeaderKind">Kind</div>
@@ -13,19 +13,19 @@
 
           <div class="categorySub">
             <select name="typeOfWork" v-model="typeOfWork"> 
-              <option value="All" selected>All types</option>
+              <option value="All" selected>Всі типи</option>
               <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
             </select>
           </div>
           <div class="kindSub">
             <select name="genreOfWork" v-model="genreOfWork">
-              <option value="All" selected>All genres</option>
+              <option value="All" selected>Всі жанри</option>
               <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
             </select>
           </div>
         </div>
             <div class="searchSub">
-              <input type="text" placeholder="search your fulcrum" v-model="searching">
+              <input type="text" placeholder="знайди свій fulcrum" v-model="searching">
             </div>  
       </div>
     </div>
@@ -33,11 +33,11 @@
    <div class="content">
 
        <div class="container">
-           <p class="mainContentP">Our goal is to unite
-creative people</p>
+           <p class="mainContentP">Наша мета - об’єднати
+творчих людей</p>
            
             <p class="infoProjContent">
-              <span>This project is intended for the free distribution of textual information (books, poems, articles and so on).</span>
+              <span>Цей проект призначений для вільного розповсюдження текстової інформації (книги, вірші, статті тощо).</span>
               <i class="fas fa-search" @click="isActiveSubHeaderFunction()"></i>
             </p>
             <ul class="portfolio-grid" id="works">

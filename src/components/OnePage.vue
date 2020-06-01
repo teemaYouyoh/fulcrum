@@ -5,7 +5,7 @@
             <div class="container"> 
                 <div class="authorBlock">
                     <h2>{{work.name}}</h2>
-                    <router-link :to="'/profile/'+work.authorId"><p>{{work.author}}</p></router-link>
+                    <router-link :to="'/profile/'+work.authorId"><p class="author__one-page">{{work.author}}</p></router-link>
                     <p v-if="isAuthor == 'true'"  class="deleteButton" @click="editWork()">РЕДАГУВАТИ</p>
                     <p v-if="isAuthor == 'true'" @click="active = !active" class="deleteButton">УДАЛИТЬ</p>
                 </div>
@@ -22,6 +22,7 @@
                     ref="myTextarea"
                     v-model="work.text"
                     :min-height="130"
+                    readonly
                 />
                 <!-- <div v-show="isEdit == true">
                     <textarea name="" v-model="work.text" id="" cols="30" rows="10">
@@ -38,9 +39,9 @@
                 
                 <div class="functionsOnePage">
                     <div class="downloadBut" @click="downloadText(work._id)">
-                        Download
+                        Завантажити
                     </div>
-                    <div class="readAllMore">Read More</div>
+                    <!-- <div class="readAllMore">Read More</div> -->
                 </div>
             </div>
         </div>
@@ -103,6 +104,7 @@ export default {
             // console.log(this.work.authorId, currentUser._id);
             if(this.work.authorId == currentUser._id){ 
                 this.isAuthor ='true';
+                document.getElementById("textArea").readOnly = false;
             }
         })
         // var s = '<h1 id="myDiv">asdas</h1>';
@@ -121,7 +123,7 @@ export default {
         editWork(){
             Vue.axios.put('http://localhost:3000/works/'+this.work._id, JSON.parse(JSON.stringify(this.work))).then((response)=>{
                 console.log("success");
-                this.$router.push('/');
+                // this.$router.push('/');
             })
         },
         onConfirm() {
@@ -171,6 +173,7 @@ export default {
 .authorBlock{
     text-align: left;
     padding-left: 1.25%;
+    margin-bottom: 40px;
 }
 
 .authorBlock h2{
@@ -181,7 +184,7 @@ export default {
 }
 
 .authorBlock p{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color:#707970;
 }
 
@@ -207,21 +210,31 @@ export default {
 }
 
 #textArea{
-    max-width: 600px;
-    height: 300px;
+    max-width: 950px;
+    /* height: 300px; */
     background-color: rgba(255, 255, 255, 0.082);
     margin: auto;
     width: 100%;
     display: flex;
     border: none;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); */
     border-radius: 10px;
     padding: 15px;
     resize: none;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    /* overflow: hidden; */
+    /* min-height: 100vh;     */
+}
+
+#textArea:focus{
+    outline: none;
 }
 
 .downloadBut,
 .readAllMore{
+    margin-top: 40px;
     color: #000;
     font-size: 1.5rem;
     font-weight: 500;
@@ -255,7 +268,15 @@ export default {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     flex-direction: column;
 }
-
+.work__text{
+    max-width: 750px;
+    width: 100%;
+    margin: auto;
+    font-size: 18px;
+    line-height: 40px;
+    padding: 40px 0px;
+    display: block;
+}
 .warning p{
     padding-bottom: 20px
 }
@@ -270,7 +291,9 @@ export default {
     cursor: pointer;
     /* margin-top: 20px; */
 }
-
+.author__one-page{
+    font-size: 30px;
+}
 .buttons__warning{
    
     /* display: flex;

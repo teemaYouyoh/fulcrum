@@ -64,7 +64,9 @@ export default {
 <style scoped>
 
 /* HEADER */
-
+.container{
+  
+}
 .header{
   height: 100px;
   background: #2b2b2b;

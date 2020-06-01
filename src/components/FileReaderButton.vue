@@ -1,6 +1,6 @@
 <template>
   <label class="text-reader">
-    Load
+    Завантажити файл
     <input type="file" @change="loadTextFromFile">
   </label>
 </template>
@@ -24,13 +24,35 @@ export default {
   position: relative;
   overflow: hidden;
   display: inline-block;
-
+  text-align: center;
+    /* margin: 0 auto; */
+    padding: 1.25%;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.05rem;
+    width: 20%;
+    text-transform: uppercase;
+    transition: 0.5s;
   /* Fancy button style 😎 */
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
+  /* border: 2px solid black; */
+  /* border-radius: 5px; */
+  /* padding: 8px 12px; */
+  /* cursor: pointer; */
 }
+
+.text-reader:hover {
+  color: #FFF;
+  background-color: #000;
+}
+
+.text-reader:focus {
+  outline: none;
+}
+
 .text-reader input {
   position: absolute;
   top: 0;
