@@ -16,7 +16,6 @@
                          <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
                     </select>
               </div>  
-                <!-- <input type="text" > -->
                 <div class="rightSideAdd">
                     <label for="textAreaText">Enter your work please or load text from file</label>
                     <textarea v-model="work.text" id="textAreaText" v-on:change="handleChange" v-on:keyup="handleTextArea">
@@ -28,7 +27,7 @@
                 <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
                 <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
                 <label for="file">Upload your fulcrum photo</label>
-                <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
+                <input type="file" id="file" ref="file" class="fileImg" v-on:change="submitFile()" />
                             
                 <div class="butBlock">
                         <button class="workAdderButton" @click="addWork()">Add work</button>
@@ -90,16 +89,38 @@
         },
         methods : {
             addWork(){
-                Vue.axios.put("http://localhost:3000/works/"+this.work._id, JSON.parse(JSON.stringify(this.work))).then(response => {
+                let d = new Date();
+                this.work.date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+                this.work.author = this.currentUser.about_u.name;
+                this.work.authorId = this.currentUser._id;
+
+                Vue.axios.post("http://localhost:3000/works/", JSON.parse(JSON.stringify(this.work))).then(response => {
                     console.log(response.data);
                 })
-                // $router.push("/");
+                $router.push("/");
             },
-            submitFileText(){
+            handleChange : function(e) {
+                this.text = JSON.stringify(e.target.value);
+            },
+            submitFile() {
                 let formData = new FormData();
-                formData.append('file', this.file);
-                console.log(formData);
-            },
+                let fileName = `${Math.floor(Math.random() * Math.floor(10000))}${this.currentUser._id}`;
+                console.log
+                this.work.image = '../uploads/image/' + fileName + '.jpg';
+
+                formData.append('file', this.$refs.file.files[0]);
+                formData.append('student_id', fileName);
+
+                Vue.axios.post('http://localhost:3000/uploadphoto', formData, { headers: {
+                        'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(function () {
+                        console.log('SUCCESS!!');
+                    })
+                    .catch(function () {
+                    console.log('FAILURE!!');
+                    });
+            },            
             handleTextArea : function(e) {
             // if (e.keyCode === 13) {
             //     this.work.text += "</br>"
@@ -111,51 +132,6 @@
             //  console.log(this.work.text);
             },
             noop(){},
-            handleChange : function(e) {
-                this.text = JSON.stringify(e.target.value);
-                console.log(e.target.value);
-            },
-            createWorkForImg(){
-                let d = new Date();
-                let curr_date = d.getDate();
-                let curr_month = d.getMonth() + 1;
-                let curr_year = d.getFullYear();
-                this.work.date = curr_year + "-" + curr_month + "-" + curr_date;
-                this.work.author = this.currentUser.about_u.name;
-                this.work.authorId = this.currentUser._id;
-                Vue.axios.post("http://localhost:3000/works", JSON.parse(JSON.stringify(this.work))).then(response => {
-                    console.log(response.data);
-                    this.work = response.data;
-                    this.submitFile();
-                    this.work.image = '../uploads/image/' + this.work._id + '.jpg';
-                })
-                
-            },
-            submitFile() {
-                let formData = new FormData();
-                formData.append('file', this.file);
-                formData.append('student_id', this.work._id);
-                Vue.axios.post('http://localhost:3000/uploadphoto', formData, { headers: {
-                        'Content-Type': 'multipart/form-data'
-                        }
-                    }).then(function () {
-                        console.log('SUCCESS!!');
-                    })
-                    .catch(function () {
-                    console.log('FAILURE!!');
-                    });
-                },
-           handleFileUpload() {
-                this.file = this.$refs.file.files[0];
-                this.createWorkForImg();
-                this.work.image = '../uploads/image/' + this.work._id + '.jpg';
-            },
-            // handleFileTextUpload() {
-            //     this.file = this.$refs.file.files[1];
-                
-            //     // this.createWorkForImg();
-            //     // this.work.image = '../uploads/image/' + this.work._id + '.jpg';
-            // },
         },
         computed : {
             listTypesOfWorks(){

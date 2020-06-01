@@ -16,7 +16,13 @@
                        <button class="button__warning disuccess" @click="active =!active">Ні</button>
                    </div>
                 </div>
-                <textarea name="" id="textArea" v-model="work.text" cols="30" rows="10"></textarea>
+                <!-- <textarea name="text"  v-model="work.text" cols="30" rows="10"></textarea> -->
+                <textarea-autosize
+                    id="textArea"
+                    ref="myTextarea"
+                    v-model="work.text"
+                    :min-height="130"
+                />
                 <!-- <div v-show="isEdit == true">
                     <textarea name="" v-model="work.text" id="" cols="30" rows="10">
                         
@@ -55,9 +61,12 @@
     import Header from './Header.vue' 
     import Footer from './Footer.vue'
     import FileReader from "./FileReader.vue"
+    import TextareaAutosize from 'vue-textarea-autosize'
 
     Vue.use(VueMaterial)
     Vue.use(VueAxios, axios)
+    Vue.use(TextareaAutosize)
+
 // Vue.use(clampy);
 
 // Vue.use(clampy, {
@@ -89,9 +98,9 @@ export default {
         Vue.axios.get("http://localhost:3000/works/" + this.$route.params.id).then(response=>{
             console.log(response.data);
             this.work = response.data;
-            document.getElementById('textArea').innerHTML = this.work.text;
-            let currentUser= this.$store.getters.getCurrentUser;
-            console.log(this.work.authorId, currentUser._id);
+            // document.getElementById('textArea').innerHTML = this.work.text;
+            let currentUser = this.$store.getters.getCurrentUser || {_id: null};
+            // console.log(this.work.authorId, currentUser._id);
             if(this.work.authorId == currentUser._id){ 
                 this.isAuthor ='true';
             }
