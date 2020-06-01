@@ -5,33 +5,35 @@
             <div class="container">
                 <div class="fullSide">
               <div class="leftSideAdd">
-                    <label for="nameOfWork">Enter the name of the work</label>
+                    <label for="nameOfWork">Введіть назву роботи</label>
                     <input type="text" v-model="work.name" id="nameOfWork">
-                    <label for="typePoem">Enter the type of work</label>
+                    <label for="typePoem">Введіть тип роботи</label>
                     <select name="section" v-model="work.section" id="typePoem">
                         <option v-for="type in listTypesOfWorks" :value="type" v-bind:key='type'>{{type}}</option>
                     </select>
-                    <label for="genreOf">Enter the genre of work</label>
+                    <label for="genreOf">Введіть жанр роботи</label>
                     <select name="genre" v-model="work.genre" id="genreOf">
                          <option v-for="genre in listGenreOfWorks" :value="genre" v-bind:key='genre'>{{genre}}</option>
                     </select>
               </div>  
                 <!-- <input type="text" > -->
                 <div class="rightSideAdd">
-                    <label for="textAreaText">Enter your work please or load text from file</label>
+                    <label for="textAreaText">Введіть свій твір, або завантажте файл</label>
                     <textarea v-model="work.text" id="textAreaText" v-on:change="handleChange" v-on:keyup="handleTextArea">
 
                     </textarea>
                 </div>
-                <FileReaderButton @load="work.text = $event"></FileReaderButton>
                 </div>
                 <!-- <img src="/src/img/bg.jpg" alt="bf" @click="addWork()"> -->
                 <!-- <a href="/src/img/bg.jpg" download="">aaaa</a> -->
-                <label for="file">Upload your fulcrum photo</label>
+                <label for="file">Завантаж обкладинку свого твору</label>
+
                 <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
                             
                 <div class="butBlock">
-                        <button class="workAdderButton" @click="addWork()">Add work</button>
+                        <FileReaderButton @load="work.text = $event"></FileReaderButton>
+
+                        <button class="workAdderButton" @click="addWork()">Додати роботу</button>
                 </div>
 
  
@@ -189,6 +191,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
+
 }
 body{
     height: 100%;
@@ -203,12 +206,14 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 85vh;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .fullSide{
         display: flex;
     /* flex-direction: row;  */
-    justify-content: space-around;
+    justify-content: space-between;
      width: 100%;
      padding-bottom: 3.45%;
 }
@@ -252,13 +257,10 @@ select{
     padding: 1%;
 }
 
-label{
-    font-size: 0.95rem;
-}
-
 .butBlock{
    display: flex;
-   justify-content: center;
+   justify-content: space-around;
+   padding-top: 40px;
 }
 
 .workAdderButton{
@@ -271,7 +273,7 @@ label{
     border-radius: 25px;
     cursor: pointer;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     width: 20%;
     text-transform: uppercase;
     transition: 0.5s;

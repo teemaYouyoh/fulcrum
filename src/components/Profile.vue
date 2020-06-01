@@ -5,54 +5,52 @@
               <div class="text-intro" id="site-type">
                 <div class="topProfileBar">
                       <img class="profilePhoto" :src="user.avatar" @click="isActiveEditProfileFunction()">
+                      <div class="info">
                       <h2>{{user.about_u.name}}</h2>
+                      <p class="stand"> <span class="infoProf">{{user.about_u.phone}}</span></p>
+                      </div>
                   </div>
                     <div class="editProfile" v-if="isCurrentUser == 'true'">
                         <div class="container">
-                            <label for="file">You can change your profile photo</label>
+                            <label for="file">Ви можете встановити фото для профіля</label>
                             <input type="file" id="file" ref="file" class="fileImg" v-on:change="handleFileUpload()" />
                             
                             
-                            <label for="nameProf">Enter your Name</label>
+                            <label for="nameProf">Введіть своє ім'я</label>
                             <input type="text" placeholder="name" v-model="editUser.name" id="nameProf">
-                            <label for="phoneProf">Enter your email</label>
+                            <label for="phoneProf">Введіть свій email</label>
                             <input type="text" placeholder="email" v-model="editUser.email" id="phoneProf">
                             <!-- <label for="birthdayProf">Enter your birthday</label>
                             <input type="text" placeholder="birthday" v-model="editUser.birthday" id="birthdayProf"> -->
-                            <label for="passwordProf">Enter your new password</label>
+                            <label for="passwordProf">Введіть свій новий пароль</label>
                             <input type="password" placeholder="password" v-model="editUser.password" id="passwordProf">
-                            <button v-on:click="submitFile()" id="submitBut">Submit</button>
+                            <button v-on:click="submitFile()" id="submitBut">Підтвердити</button>
                         </div>
                         
                     </div>
                     
                   
                   <div class="fullContentProfile">
-                      <div class="leftContentProfile">
+                      <!-- <div class="leftContentProfile">
                           <p>My homepage</p>
                           <p>My creation</p>
                           <p>Sign out</p>
                       </div>
                       
                       <div class="rightContentProfile">
-                          <!-- <div class="emailContentProfile">
-                              <p class="stand">My mailbox: <span class="infoProf">{{user.email}}</span></p>
-                          </div> -->
+
                           
                           <div class="telephoneContentProfile">
-                              <p class="stand">About me: <span class="infoProf">{{user.about_u.phone}}</span></p>
                           </div>
                           
-                          <!-- <div class="birthdayContentProfile">
-                              <p class="stand">Birthday: <span class="infoProf">{{user.about_u.birthday}}</span></p>
-                          </div> -->
+
                       </div>
-                        
+                         -->
                   </div>
               </div>
               <div class="listOfWorks">
                   <div class="container">
-                      <h3>My Fulcrums</h3>
+                      <h3>Мої роботи</h3>
                    <ul class="portfolio-grid" id="works">
                        <li v-for="work in works" v-bind:key="work._id" class="grid-item">
                            <!-- <router-link :to="'/single-page/'+work._id">{{work.name}}</router-link>  -->
@@ -419,24 +417,24 @@ PROFILE
     -webkit-background-size: cover;
     background-size: cover; */
     display: flex;
-    background-color: rgb(10, 10, 10);
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
+    background-color: #f5f5f5;
+    padding: 50px 0px;
 }
 
 .topProfileBar h2{
-    color: #fff;
+    color: #2b2b2b;
     font-size: 3rem;
     display: flex;
     font-weight: 700;
     align-items: center;
 /*    padding-left: 2.5%;*/
-    margin-left: 1.5%;
-    text-shadow: 6px 6px 0px rgba(10,10,10,0.8);
+    /* margin-left: 1.5%; */
+    /* text-shadow: 6px 6px 0px rgba(10,10,10,0.8); */
     opacity: 0.85;
-    padding: 0.5%;
+    /* padding: 0.5%; */
     max-height: 40px;
 /*    -webkit-text-stroke: 1px black;*/
+    padding-left: 40px;
 }
 
 .tinyProfilePhoto{
@@ -517,6 +515,9 @@ PROFILE
      color: rgba(10,10,10,0.8);
      font-weight: 600;
      width: 100%;
+     padding-top: 70px;
+     text-align: center;
+     padding-left: 20px;
 }
 .emailContentProfile span,
 .telephoneContentProfile span,
