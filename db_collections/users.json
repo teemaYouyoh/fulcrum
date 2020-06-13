@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "5dde9b4d94969d326cf81049"
+  },
+  "email": "example@mail.com",
+  "password": "1234",
+  "about_u": {
+    "phone": "+38 066 66 66 666",
+    "name": "Vitaliy Kotkin",
+    "email": "example@mail.com"
+  },
+  "avatar": "../uploads/image/5dde9b4d94969d326cf81049.jpg"
+},{
+  "_id": {
+    "$oid": "5de29cd5f98b0e361058a394"
+  },
+  "email": "example@gmail.com",
+  "password": "1234",
+  "about_u": {
+    "phone": "+38 077 77 77 777",
+    "name": "Veronika Omelchuk"
+  },
+  "avatar": "/src/img/face.png"
+},{
+  "_id": {
+    "$oid": "5de54d4b53d8043a04dca1a9"
+  },
+  "about_u": {
+    "name": "21",
+    "phone": "21"
+  },
+  "email": "2",
+  "password": "21",
+  "avatar": "../uploads/image/5de54d4b53d8043a04dca1a9.jpg"
+},{
+  "_id": {
+    "$oid": "5de7aa4d63371d0ddc8698a8"
+  },
+  "about_u": {
+    "name": "ddyd",
+    "phone": "5957093"
+  },
+  "email": "drgsg@gmail.com",
+  "password": "0000",
+  "avatar": "/src/img/face.png"
+}]

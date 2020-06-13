@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "5de15714efa66c1e20fe694c"
+  },
+  "verses": [
+    "philosophical verse",
+    "heart-to-heart",
+    "social verse",
+    "scene"
+  ],
+  "books": [
+    "business",
+    "romance",
+    "novel",
+    "detective story",
+    "fantasy",
+    "science fiction",
+    "drollery"
+  ],
+  "articles": [
+    "instruction",
+    "review",
+    "interview",
+    "science & popular science",
+    "news",
+    "storytelling",
+    "social issues"
+  ],
+  "__v": 0
+}]
